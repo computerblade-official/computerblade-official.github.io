@@ -65,19 +65,18 @@
         </style>
 </head>
 
-<body data-bs-theme="dark" onload="getUsername();">
+<body data-bs-theme="dark" onload="getUsername();refAllVals();">
     <center>
         <h1>Create New Note</h1>
         <p style="display: none;">Welcome, <span id="username">user</span>!</p>
         <hr size="1" color="#AAA">
-        <p align="center">Bold, Italics, and more features coming soon!</p>
         <div style="display: flex; align-items: center; justify-content: center;">
             <input type="text" class="form-control" id="noteTitle" onkeyup="chkTitle();" placeholder="Note Title"
                 style="width: 77%;">
             &nbsp;&nbsp;
-            <input type="color" title="Background Color" value="#000000" id="noteBgColor" class="form-control form-control-color">
+            <input type="color" title="Background Color" value="#000000" id="noteBgColor" class="form-control form-control-color" oninput="setBgPrev();" onchange="setBgPrev();">
             &nbsp;&nbsp;
-            <input type="color" title="Text Color" value="#FFFFFF" id="noteFgColor" class="form-control form-control-color">
+            <input type="color" title="Text Color" value="#FFFFFF" id="noteFgColor" class="form-control form-control-color" oninput="setFgPrev();" onchange="setFgPrev();">
         </div>
         <p> </p>
         <textarea class="form-control" style="min-width: 85% !important;max-width: 85% !important;width: 85% !important;" rows="14" id="noteText" place="Note Content"></textarea>
@@ -98,6 +97,22 @@
         let noteText = "";
         let bgcol = "";
         let fgcol = "";
+
+        function refAllVals() {
+            document.getElementById('noteTitle').value = "";
+            easyMDE.value("");
+            document.getElementById('noteBgColor').value = "#000000";
+            document.getElementById('noteFgColor').value = "#FFFFFF";
+        }
+
+        function setBgPrev() {
+            document.querySelectorAll('.editor-preview')[0].style.background = document.getElementById('noteBgColor').value;
+        }
+
+        function setFgPrev() {
+            document.querySelectorAll('.editor-preview')[0].style.background = document.getElementById('noteFgColor').value;
+        }
+
         function chkTitle() {
             if (document.getElementById('noteTitle').value.includes('"') || document.getElementById('noteTitle').value.includes("'") || document.getElementById('noteTitle').value.includes(".") || document.getElementById('noteTitle').value.includes("#") || document.getElementById('noteTitle').value.includes("$") || document.getElementById('noteTitle').value.includes("[") || document.getElementById('noteTitle').value.includes("]")) {
                 document.getElementById('noteTitle').value = document.getElementById('noteTitle').value.replace('"', '').replace("'", "").replace(".", "").replace("#", "").replace("$", "").replace("[", "").replace("]", "").trim();
