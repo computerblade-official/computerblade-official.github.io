@@ -54,9 +54,9 @@
         let bgcol = "";
         let fgcol = "";
         function chkTitle() {
-            if (document.getElementById('noteTitle').value.includes('"') || document.getElementById('noteTitle').value.includes("'")) {
-                document.getElementById('noteTitle').value = document.getElementById('noteTitle').value.replace('"', '').replace("'", "").trim();
-                alert("Quotes in title are not allowed!");
+            if (document.getElementById('noteTitle').value.includes('"') || document.getElementById('noteTitle').value.includes("'") || document.getElementById('noteTitle').value.includes(".") || document.getElementById('noteTitle').value.includes("#") || document.getElementById('noteTitle').value.includes("$") || document.getElementById('noteTitle').value.includes("[") || document.getElementById('noteTitle').value.includes("]")) {
+                document.getElementById('noteTitle').value = document.getElementById('noteTitle').value.replace('"', '').replace("'", "").replace(".", "").replace("#", "").replace("$", "").replace("[", "").replace("]", "").trim();
+                alert("These characters (\", ', ., #, $, [, ]) in title are not allowed!");
 
             }
         }
