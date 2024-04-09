@@ -61,19 +61,25 @@
             username = document.getElementById("username").value;
             pw = document.getElementById("pw").value;
             firebase.database().ref('Users/' + username).on('value', function (snapshot) {
-                if (snapshot.exists()) {
-                    alert('Username Already Taken! Please try again with a different one!');
-                } else {
-                    username = document.getElementById("username").value;
-                    pw = document.getElementById("pw").value;
-                    var listRef = database.ref('Users/' + username)
-                    listRef.set({
-                        'username': username,
-                        'password': pw
-                    })
+                if (snapshot.key === username) {
+                    const data = snapshot.val()
+                    if (data == username) {
+                        alert('Username Already Taken! Please try again with a different one!');
+                    } else {
+                        username = document.getElementById("username").value;
+                        pw = document.getElementById("pw").value;
+                        var listRef = database.ref('Users/' + username)
+                        listRef.set({
+                            'username': username,
+                            'password': pw
+                        })
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("password", pw);
+                        alert("Account created successfully!");
+                        window.open('notes.html', '_self')
+                    }
                 }
-            });
-
+            })
         }
 
         function login() {

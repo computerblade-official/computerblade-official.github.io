@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="node_modules/text-security/text-security-square.css">
 </head>
 
-<body data-bs-theme="dark" onload="read();">
+<body data-bs-theme="dark" onload="read();clearNotesTxt();">
     <center>
         <div style="display: flex; text-align: center; align-items: center; justify-content: center;">
             <button class="btn btn-dark" onclick="window.open('notes.html', '_self');">Back</button>
@@ -24,19 +24,24 @@
         </div>
         <p id="author">By User.</p>
         <hr size="1" color="black">
-        <p id="content">Lorem ipsum dolor sit amet.</p>
     </center>
+    <p id="content">Lorem ipsum dolor sit amet.</p>
+    <script src="mini.js"></script>
     <script>
         let title = sessionStorage.getItem("title");
         let text = sessionStorage.getItem("text");
+        let bg = sessionStorage.getItem("bg");
+        let fg = sessionStorage.getItem("fg");
 
         function read() {
             document.getElementById('title').innerHTML = title;
             document.getElementById('content').innerHTML = text;
             document.getElementById('author').innerHTML = 'By ' + localStorage.getItem("username");
+            document.body.style.backgroundColor = bg;
+            document.body.style.color = fg;
         }
     </script>
-    
+
 </body>
 
 </html>

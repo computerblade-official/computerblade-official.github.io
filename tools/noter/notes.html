@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="node_modules/text-security/text-security-disc.css">
     <link rel="stylesheet" href="node_modules/text-security/text-security-circle.css">
     <link rel="stylesheet" href="node_modules/text-security/text-security-square.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.0/purify.min.js" integrity="sha512-ZCsRHqhdDXrq4iTXVZLkGBsOfDlvhvHhEMQlCosf9Oqy1p6xizF1LSWa6uuISGqeh9PmCzfneGcYZvc9t/hjaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.1/marked.min.js" integrity="sha512-pSeTnZAQF/RHxb0ysMoYQI/BRZsa5XuklcrgFfU3YZIdnD3LvkkqzrIeHxzFi6gKtI8Cpq2DEWdZjMTcNVhUYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body data-bs-theme="dark" onload="getUsername();">
@@ -33,6 +35,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-database-compat.js"></script>
     <script>
+        
         const firebaseConfig = {
             databaseURL: "https://noter-890c2-default-rtdb.firebaseio.com/"
         }
@@ -51,11 +54,12 @@
             for (var key in data) {
                 var value = data[key]
                 htmlData += `
-                <div class="card" style="width: 18rem;width: 250px;word-wrap: break-word;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-                    <div class="card-body">
-                        <h5 class="card-title">${value.title}</h5>
-                        <p class="card-text">${value.text}</p>
+                <div class="card" style="background-color: ${value.bg} !important; color: ${value.fg} !important; width: 355px;word-wrap: break-word;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                    <div class="card-body" style="background-color: ${value.bg} !important; color: ${value.fg} !important;">
+                        <h5 class="card-title" style="color: ${value.fg} !important;">${value.title}</h5>
+                        <p class="card-text" style="color: ${value.fg} !important;">${value.text}</p>
                         <a href="javascript:viewNote('${key}');" class="btn btn-dark">View Note</a>
+                        <a href="javascript:editNote('${key}');" class="btn btn-dark">Edit Note</a>
                         <a href="javascript:deleteNote('${key}');" class="btn btn-dark">Delete Note</a>
                     </div>
                 </div>
@@ -74,13 +78,30 @@
             fetchedNote.on('value', (snapshot2) => {
                 var value = snapshot2.val()
                 var ti = value.title
-                var te = value.text
+                var te = DOMPurify.sanitize(marked.parse(value.text), {USE_PROFILES: {html: true}});
                 sessionStorage.setItem("title", ti);
                 sessionStorage.setItem("text", te);
             })
             window.open('curnote.html', '_self')
         }
 
+        function editNote(note) {
+            var fetchedNote = database.ref('Users/' + localStorage.getItem('username') + "/Notes/" + note)
+            fetchedNote.on('value', (snapshot2) => {
+                var value = snapshot2.val()
+                var ti = value.title
+                var te = value.text
+                var bg = value.bg
+                var fg = value.fg
+                sessionStorage.clear();
+                sessionStorage.setItem("oldTitle", ti);
+                sessionStorage.setItem("title", ti);
+                sessionStorage.setItem("text", te);
+                sessionStorage.setItem("bg", bg);
+                sessionStorage.setItem("fg", fg);
+            })
+            window.open('editnote.html', '_self')
+        }
     </script>
 </body>
 
