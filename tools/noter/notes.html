@@ -79,8 +79,12 @@
                 var value = snapshot2.val()
                 var ti = value.title
                 var te = DOMPurify.sanitize(marked.parse(value.text), {USE_PROFILES: {html: true}});
+                var bg = value.bg
+                var fg = value.fg
                 sessionStorage.setItem("title", ti);
                 sessionStorage.setItem("text", te);
+                sessionStorage.setItem("bg", bg);
+                sessionStorage.setItem("fg", fg);
             })
             window.open('curnote.html', '_self')
         }
