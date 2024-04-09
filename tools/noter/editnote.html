@@ -19,6 +19,52 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.1/marked.min.js"
         integrity="sha512-pSeTnZAQF/RHxb0ysMoYQI/BRZsa5XuklcrgFfU3YZIdnD3LvkkqzrIeHxzFi6gKtI8Cpq2DEWdZjMTcNVhUYA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@toast-ui/editor@3.2.2/dist/toastui-editor.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@toast-ui/editor@3.2.2/dist/toastui-editor.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+        <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+        <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+        <style>
+            .EasyMDEContainer {
+                text-align: left !important;
+                width: 85% !important;
+            }
+
+            .EasyMDEContainer .CodeMirror {
+                color: #ccc;
+                border-color: #333;
+                background-color: #000;
+            }
+            .EasyMDEContainer .cm-s-easymde .CodeMirror-cursor {
+                border-color: #ccc;
+            }
+
+            .EasyMDEContainer .editor-toolbar > * {
+                color: #ccc;
+            }
+
+            .EasyMDEContainer .editor-toolbar > .active, .editor-toolbar > button:hover, .editor-preview pre, .cm-s-easymde .cm-comment {
+                background-color: #444;
+            }
+
+            .EasyMDEContainer .CodeMirror-fullscreen {
+                background: #000;
+            }
+
+            .editor-toolbar {
+                border-top: 1px solid #333;
+                border-left: 1px solid #333;
+                border-right: 1px solid #333;
+            }
+
+            .editor-toolbar.fullscreen {
+                background: #000;
+            }
+
+            .editor-preview {
+                background: #000;
+            }
+        </style>
 </head>
 
 <body data-bs-theme="dark" onload="getUsername();getOldInputs();">
@@ -36,7 +82,7 @@
             <input type="color" title="Text Color" value="#FFFFFF" id="noteFgColor" class="form-control form-control-color">
         </div>
         <p> </p>
-        <textarea class="form-control" style="width: 85%;" rows="14" id="noteText" place="Note Content"></textarea>
+        <textarea class="form-control" style="min-width: 85% !important;max-width: 85% !important;width: 85% !important;" rows="14" id="noteText" place="Note Content"></textarea>
         <p> </p>
         <button type="button" class="btn btn-dark" style="width: 20%;" onclick="publishEdited();">Save</button>
     </center>
@@ -50,6 +96,7 @@
         }
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database()
+        const easyMDE = new EasyMDE({element: document.getElementById('noteText')});
         let noteTitle = "";
         let noteText = "";
         let bgcol = "";
@@ -65,11 +112,11 @@
 
         function getOldInputs() {
             let title = sessionStorage.getItem("title");
-            let text = turndownService.turndown(sessionStorage.getItem("text"));
+            let text = sessionStorage.getItem("text");
             let bg = sessionStorage.getItem("bg");
             let fg = sessionStorage.getItem("fg");
             document.getElementById('noteTitle').value = title;
-            document.getElementById('noteText').value = text;
+            easyMDE.value(text);
             document.getElementById('noteBgColor').value = bg;
             document.getElementById('noteFgColor').value = fg;
         }
@@ -77,7 +124,7 @@
         function publishEdited() {
             database.ref("Users/" + localStorage.getItem("username") + "/Notes/" + oldTitle).remove();
             noteTitle = document.getElementById("noteTitle").value;
-            noteText = document.getElementById("noteText").value;
+            noteText = easyMDE.value();
             bgcol = document.getElementById("noteBgColor").value;
             fgcol = document.getElementById("noteFgColor").value;
 
@@ -102,9 +149,9 @@
         }
 
         function chkTitle() {
-            if (document.getElementById('noteTitle').value.includes('"') || document.getElementById('noteTitle').value.includes("'")) {
-                document.getElementById('noteTitle').value = document.getElementById('noteTitle').value.replace('"', '').replace("'", "").trim();
-                alert("Quotes in title are not allowed!");
+            if (document.getElementById('noteTitle').value.includes('"') || document.getElementById('noteTitle').value.includes("'") || document.getElementById('noteTitle').value.includes(".") || document.getElementById('noteTitle').value.includes("#") || document.getElementById('noteTitle').value.includes("$") || document.getElementById('noteTitle').value.includes("[") || document.getElementById('noteTitle').value.includes("]")) {
+                document.getElementById('noteTitle').value = document.getElementById('noteTitle').value.replace('"', '').replace("'", "").replace(".", "").replace("#", "").replace("$", "").replace("[", "").replace("]", "").trim();
+                alert("These characters (\", ', ., #, $, [, ]) in title are not allowed!");
 
             }
         }

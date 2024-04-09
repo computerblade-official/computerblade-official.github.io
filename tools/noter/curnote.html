@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="node_modules/text-security/text-security-disc.css">
     <link rel="stylesheet" href="node_modules/text-security/text-security-circle.css">
     <link rel="stylesheet" href="node_modules/text-security/text-security-square.css">
+    <script src="https://cdn.jsdelivr.net/npm/@toast-ui/editor@3.2.2/dist/toastui-editor.min.js"></script>
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@toast-ui/editor@3.2.2/dist/toastui-editor.min.css">
 </head>
 
 <body data-bs-theme="dark" onload="read();clearNotesTxt();">
@@ -25,7 +28,7 @@
         <p id="author">By User.</p>
         <hr size="1" color="black">
     </center>
-    <p id="content">Lorem ipsum dolor sit amet.</p>
+    <md-block id="content"></md-block>
     <script src="mini.js"></script>
     <script>
         let title = sessionStorage.getItem("title");
