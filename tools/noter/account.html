@@ -39,6 +39,7 @@
                 </td>
             </tr>
         </table>
+        <p style="color: red;display: none;" id="wpemsg">Wrong Password! Please Click 'Log In' again if it was correct.</p>
         <br>
         <p> <br>No verification required (yet)</p><br>
         <div style="display: flex;">
@@ -95,11 +96,12 @@
                         snapshot2.forEach(function (keys) {
                             if (pw == keys.val()) {
                                 p = keys.val();
+                                document.getElementById("wpemsg").style.display = "none";
                                 alert("Logged in successfully!");
                                 window.open("notes.html", "_self");
                                 return false;
                             } else if (p == "") {
-                                alert('Wrong Password! Please click OK if the password was correct.');
+                                document.getElementById("wpemsg").style.display = "block";
                                 return false;
                             }
                         });
