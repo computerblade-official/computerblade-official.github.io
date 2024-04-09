@@ -27,7 +27,7 @@
                 onclick="window.open('createnote.html', '_self')">Create New Note</button>
         </div>
         <p> </p>
-        <div id="notes" style="display: flex;">
+        <div id="notes" style="display: flex; overflow: auto;width: 100%; height: 100%;flex-wrap: wrap; margin: 10px;">
             &nbsp;
         </div>
     </center>
@@ -54,7 +54,7 @@
             for (var key in data) {
                 var value = data[key]
                 htmlData += `
-                <div class="card" style="background-color: ${value.bg} !important; color: ${value.fg} !important; width: 355px;word-wrap: break-word;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                <div class="card" style="background-color: ${value.bg} !important; color: ${value.fg} !important; width: 355px !important;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
                     <div class="card-body" style="background-color: ${value.bg} !important; color: ${value.fg} !important;">
                         <h5 class="card-title" style="color: ${value.fg} !important;">${value.title}</h5>
                         <p class="card-text" style="color: ${value.fg} !important;">${value.text}</p>
