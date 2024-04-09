@@ -89,15 +89,17 @@
                 if (snapshot.exists()) {
                     localStorage.setItem("username", username);
                     localStorage.setItem("password", pw);
+                    let p = "";
                     var query = firebase.database().ref("Users/" + username).orderByKey();
                     query.on("value", function (snapshot2) {
                         snapshot2.forEach(function (keys) {
                             if (pw == keys.val()) {
+                                p = keys.val();
                                 alert("Logged in successfully!");
                                 window.open("notes.html", "_self");
                                 return false;
-                            } else {
-                                alert('Wrong Password!');
+                            } else if (p == "") {
+                                alert('Wrong Password! Please click OK if the password was correct.');
                                 return false;
                             }
                         });
