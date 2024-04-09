@@ -13,15 +13,18 @@
     <link rel="stylesheet" href="node_modules/text-security/text-security-disc.css">
     <link rel="stylesheet" href="node_modules/text-security/text-security-circle.css">
     <link rel="stylesheet" href="node_modules/text-security/text-security-square.css">
-    <script src="https://cdn.jsdelivr.net/npm/@toast-ui/editor@3.2.2/dist/toastui-editor.min.js"></script>
     <script type="module" src="https://md-block.verou.me/md-block.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@toast-ui/editor@3.2.2/dist/toastui-editor.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js" integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
 </head>
 
-<body data-bs-theme="dark" onload="read();clearNotesTxt();">
+<body data-bs-theme="dark" onload="read();">
     <center>
         <div style="display: flex; text-align: center; align-items: center; justify-content: center;">
             <button class="btn btn-dark" onclick="window.open('notes.html', '_self');">Back</button>
+            &nbsp;&nbsp;
+            <button class="btn btn-dark" onclick="share();">Share</button>
             &nbsp;&nbsp;
             <h1 id="title">Note</h1>
         </div>
@@ -29,6 +32,20 @@
         <hr size="1" color="black">
     </center>
     <md-block id="content"></md-block>
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            
+            <h3>Share</h3>
+            <p>
+                <button class="btn btn-dark" onclick="copymd();">Copy Markdown</button>
+                <button class="btn btn-dark" onclick="copyhtml();">Copy HTML</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="mini.js"></script>
     <script>
         let title = sessionStorage.getItem("title");
@@ -42,6 +59,25 @@
             document.getElementById('author').innerHTML = 'By ' + localStorage.getItem("username");
             document.body.style.backgroundColor = bg;
             document.body.style.color = fg;
+        }
+
+        function share() {
+            document.getElementById('id01').style.display='block';
+        }
+
+        function copymd() {
+            var copyText = document.getElementById("content");
+            var turndownService = new TurndownService()
+            var markdown = turndownService.turndown(copyText.innerHTML)
+            navigator.clipboard.writeText(markdown);
+            alert('Copied Successfully!');
+        }
+
+        function copyhtml() {
+            var copyText = document.getElementById("content");
+            var copyhtml = copyText.innerHTML;
+            navigator.clipboard.writeText(copyhtml);
+            alert('Copied Successfully!');
         }
     </script>
 

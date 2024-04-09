@@ -11,7 +11,7 @@ function clearNotesTxt() {
     let noteTitle = document.getElementById("noteTitle").value;
     let noteText = document.getElementById("noteText").value;
     let bgcol = document.getElementById("noteBgColor").value;
-    let fgcol = document.getElementById("notefFgColor").value;
+    let fgcol = document.getElementById("noteFgColor").value;
     noteTitle = "";
     noteText = "";
     bgcol = "#000000";
