@@ -29,7 +29,7 @@
         <hr size="1" color="#AAA">
         <div style="display: flex; align-items: center;">
             &nbsp;&nbsp;<button type="button" class="btn btn-dark" style="width: 20%;"
-                onclick="window.open('createnote.html', '_self')">Create New Note</button>
+                onclick="createNote();">Create New Note</button>
         </div>
         <p> </p>
         <div id="notes" style="display: flex; overflow-y: auto;width: 100%; height: 100%;flex-wrap: wrap; margin: 10px; overflow-x: hidden;">
@@ -49,7 +49,7 @@
         let noteTitle = "";
         let noteText = "";
         const dataContainer = document.getElementById("notes");
-
+        let ind = 0;
         var fetchedNotes = database.ref('Users/' + localStorage.getItem('username') + "/Notes")
         fetchedNotes.on('value', (snapshot) => {
             var data = snapshot.val()
@@ -58,6 +58,7 @@
 
             for (var key in data) {
                 var value = data[key]
+                ++ind;
                 htmlData += `
                 <div class="card" style="background-color: ${value.bg} !important; color: ${value.fg} !important; width: 355px !important;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
                     <div class="card-body" style="background-color: ${value.bg} !important; color: ${value.fg} !important;">
@@ -74,8 +75,17 @@
             dataContainer.innerHTML = htmlData
         })
 
+        function createNote() {
+            if (ind >= 10) {
+                alert('Maximum number of notes reached (10)\nPlease delete 1 or nore notes to create a new note!')
+            } else {
+                window.open('createnote.html', '_self');
+            }
+        }
+
         function deleteNote(note) {
             database.ref('Users/' + localStorage.getItem('username') + '/Notes/' + note).remove()
+            ind = Math.round(ind/2) - 1;
         };
 
         function viewNote(note) {
