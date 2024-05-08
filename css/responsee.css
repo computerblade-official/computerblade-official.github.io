@@ -1125,3 +1125,17 @@ nav.breadcrumb-nav ul li:last-child:after {content:"";}
   width:100%;
 }
 #map {z-index:1;}
+
+span[data-block] {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  color: inherit;
+  border: 1px solid #000;
+  padding: 0 .5ex;
+  color: #fff;
+  white-space: nowrap;
+  font-size: inherit;
+}
+
+span[data-block=method], span[data-block=procedure] {
+  background-color: #7c5385;
+}
