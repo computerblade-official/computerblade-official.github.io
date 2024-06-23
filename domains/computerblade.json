@@ -1,0 +1,11 @@
+{
+    "description": "Describe the use of this subdomain",
+    "repo": "https://github.com/computerblade-official/computerblade-official.github.io",
+    "owner": {
+        "username": "computerblade-official",
+        "email": "ayproductionsteam@gmail.com"
+    },
+    "record": {
+        "CNAME": "computerblade-official.github.io"
+    }
+} 
