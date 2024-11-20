@@ -52,7 +52,18 @@
       align-items: center;
     "
   >
-    <div class="window active" style="min-width: 750px; max-width: 750px; min-height: 575px; margin: auto;">
+    <script>
+      0
+    </script>
+    <div
+      class="window active"
+      style="
+        min-width: 750px;
+        max-width: 750px;
+        min-height: 575px;
+        margin: auto;
+      "
+    >
       <div class="title-bar">
         <div class="title-bar-text">@computerblade's Website</div>
         <div class="title-bar-controls">
@@ -61,8 +72,8 @@
           <button aria-label="Close"></button>
         </div>
       </div>
-      <div class="window-body has-space" style="min-height: 575px;">
-        <section class="tabs" style="min-height: 575px;">
+      <div class="window-body has-space" style="min-height: 575px">
+        <section class="tabs" style="min-height: 575px">
           <menu role="tablist" aria-label="Tabs Template">
             <button role="tab" aria-controls="tab-A" aria-selected="true">
               Home
@@ -71,13 +82,26 @@
             <button role="tab" aria-controls="tab-C">Contact</button>
             <button role="tab" aria-controls="tab-D">Friends</button>
           </menu>
-          <article role="tabpanel" id="tab-A"  style="min-height: 575px;">
+          <article role="tabpanel" id="tab-A" style="min-height: 575px">
             <h2>Hi</h2>
-            <p>I'm <a href="https://github.com/computerblade-official">@computerblade</a>. I work as a programmer, and a technology hobbyist. I have made many projects in the past using Java, C, C++, C#, Visual Basic .NET, and much more!</p>
+            <p>
+              I'm
+              <a href="https://github.com/computerblade-official"
+                >@computerblade</a
+              >. I work as a programmer, and a technology hobbyist. I have made
+              many projects in the past using Java, C, C++, C#, Visual Basic
+              .NET, and much more!
+            </p>
           </article>
-          <article role="tabpanel" id="tab-B" hidden  style="min-height: 575px;">Tab B is active</article>
-          <article role="tabpanel" id="tab-C" hidden style="min-height: 575px;">Tab C is active</article>
-          <article role="tabpanel" id="tab-D" hidden style="min-height: 575px;">Tab D is inactive</article>
+          <article role="tabpanel" id="tab-B" hidden style="min-height: 575px">
+            Tab B is active
+          </article>
+          <article role="tabpanel" id="tab-C" hidden style="min-height: 575px">
+            Tab C is active
+          </article>
+          <article role="tabpanel" id="tab-D" hidden style="min-height: 575px">
+            Tab D is inactive
+          </article>
         </section>
       </div>
     </div>
@@ -99,18 +123,18 @@
       function time() {
         var d = new Date();
         var m = d.getMinutes();
-        var h = d.getHours();        
+        var h = d.getHours();
         if (h < 12) {
-          document.getElementById('time').textContent = h + ":" + m + " AM";
+          document.getElementById("time").textContent = h + ":" + m + " AM";
         } else {
           h -= 12;
-          document.getElementById('time').textContent = h + ":" + m + " PM";
+          document.getElementById("time").textContent = h + ":" + m + " PM";
         }
-        if (h < 10) { 
-          h = "0" + h; 
+        if (h < 10) {
+          h = "0" + h;
         }
         if (m < 10) {
-          m = "0" + m; 
+          m = "0" + m;
         }
       }
 
@@ -124,8 +148,8 @@
         }
         if (mon < 10) {
           mon = "0" + mon;
-        } 
-        document.getElementById('date').textContent = day + "-" + mon + "-" + y;
+        }
+        document.getElementById("date").textContent = day + "-" + mon + "-" + y;
       }
 
       setInterval(time, 1000);
