@@ -58,6 +58,12 @@
         height: 100%;
         width: 100vw;
       }
+
+      .shortcut {
+        z-index: -99;
+        width: min-content;
+        height: min-content;
+      }
     </style>
 
     <script>
@@ -79,14 +85,7 @@
     onload="detectIfMobile()"
   >
     <div id="c">
-      <div class="shortcut" id="shortcut1">
-        <img
-          src="skills-logos/html.png"
-          alt="Website (Click me!)"
-          width="50"
-          height="50"
-        />
-      </div>
+      
       <div
         class="window active"
         style="
@@ -97,6 +96,7 @@
           left: 50%;
           transform: translate(-50%, -50%);
           z-index: 5;
+          
         "
         id="mydiv"
       >
@@ -244,8 +244,7 @@
                 />&nbsp;&nbsp;
               </div>
               <p style="color: white">&nbsp; ****</p>
-              Check out my projects by clicking the 'Projects' tab, and click
-              the Start button for fun!
+              Check out my projects by clicking the 'Projects' tab, and no I will neither be adding a start menu nor a set of shortcut icons for the desktop and taskbar.
             </article>
 
             <article
@@ -322,6 +321,7 @@
                   <a href="https://github.com/SypTitan">syptitan</a> (No
                   website, link to their GitHub profile)
                 </li>
+                <li><a href="https://creeperita104.is-a.dev/bio/">creeperita104</a></li>
               </ul>
             </article>
           </section>
@@ -329,18 +329,20 @@
       </div>
     </div>
     <div class="taskbar">
-      &nbsp;&nbsp;<img
-        src="orb.png"
-        alt="Windows 7 Start Button"
-        width="40"
-        height="40"
-        onclick="alert('Hi!')"
-        style="z-index: 99"
-      />
-      <div id="timedate">
-        <span id="time">12:00 AM</span><br />
-        <!--Placeholder time & date-->
-        <span id="date">01-01-2024</span>
+        &nbsp;&nbsp;<img
+          src="orb.png"
+          alt="Windows 7 Start Button"
+          width="40"
+          height="40"
+          onclick="alert('Hi!')"
+          style="z-index: 99"
+        />
+        
+        <div id="timedate">
+          <span id="time">12:00 AM</span><br />
+          <!--Placeholder time & date-->
+          <span id="date">01-01-2024</span>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>
@@ -356,7 +358,15 @@
         } else {
           // false for not mobile device
           console.log("not mobile device");
+          // alignWinProperly();
         }
+      }
+
+      function alignWinProperly() {
+        document.getElementById('shortcut1').style.display = 'none';
+        document.getElementById('mydiv').style.display = 'none';
+        document.getElementById('mydiv').style.display = 'block';
+        document.getElementById('shortcut1').style.display = 'block';
       }
 
       var d;
