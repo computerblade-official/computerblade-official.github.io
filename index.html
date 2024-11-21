@@ -244,7 +244,7 @@
                 />&nbsp;&nbsp;
               </div>
               <p style="color: white">&nbsp; ****</p>
-              Check out my projects by clicking the 'Projects' tab, and no I will neither be adding a start menu nor a set of shortcut icons for the desktop and taskbar.
+              Check out my projects by clicking the 'Projects' tab, and no I will neither be adding a start menu nor a set of shortcut icons for the desktop and taskbar, but you can click the start button anyway I guess.
             </article>
 
             <article
@@ -334,7 +334,7 @@
           alt="Windows 7 Start Button"
           width="40"
           height="40"
-          onclick="alert('Hi!')"
+          onclick="displayWindow()"
           style="z-index: 99"
         />
         
@@ -362,11 +362,13 @@
         }
       }
 
-      function alignWinProperly() {
-        document.getElementById('shortcut1').style.display = 'none';
-        document.getElementById('mydiv').style.display = 'none';
-        document.getElementById('mydiv').style.display = 'block';
-        document.getElementById('shortcut1').style.display = 'block';
+      function displayWindow() {
+        var win = document.getElementById('mydiv');
+        if (mydiv.style.display == 'block') {
+          mydiv.style.display = 'none';
+        } else {
+          mydiv.style.display = 'block';
+        }
       }
 
       var d;
