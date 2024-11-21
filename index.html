@@ -79,6 +79,14 @@
     onload="detectIfMobile()"
   >
     <div id="c">
+      <div class="shortcut" id="shortcut1">
+        <img
+          src="skills-logos/html.png"
+          alt="Website (Click me!)"
+          width="50"
+          height="50"
+        />
+      </div>
       <div
         class="window active"
         style="
@@ -97,7 +105,7 @@
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize" disabled></button>
-            <button aria-label="Close" onclick="window.close();"></button>
+            <button aria-label="Close" onclick="closeWindow();"></button>
           </div>
         </div>
         <div class="window-body has-space" style="min-height: 575px">
@@ -257,8 +265,11 @@
             >
               <h3>Contact me via</h3>
               Discord: <a href="">@ayproductions5051</a><br />
-              SpaceHey: <a href="https://spacehey.com/computerblade">@computerblade</a><br />
-              Reddit: <a href="https://www.reddit.com/u/NEXT-IDE">u/NEXT-IDE</a>
+              SpaceHey:
+              <a href="https://spacehey.com/computerblade">@computerblade</a
+              ><br />
+              Reddit: <a href="https://www.reddit.com/u/NEXT-IDE">u/NEXT-IDE</a
+              ><br />
               Email:
               <a href="mailto:ayproductionsteam@gmail.com"
                 >ayproductionsteam@gmail.com</a
@@ -390,6 +401,14 @@
       $(function () {
         $("#mydiv").draggable({ containment: "parent" });
       });
+
+      function closeWindow() {
+        document.getElementById("mydiv").style.display = "none";
+      }
+
+      function openWindow() {
+        document.getElementById("mydiv").style.display = "block";
+      }
 
       setInterval(time, 1000);
       setInterval(date, 1000);
