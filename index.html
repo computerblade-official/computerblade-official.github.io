@@ -1,438 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@computerblade's Website! - Desktop Page</title>
-    <meta name="description" content="@computerblade's Website, meet him on Discord, SpaceHey, Reddit, etc...">
-    <meta name="keywords" content="computerblade,computerblade-official,windows 7,windows,website,portfolio,computerblade github, computerblade Discord, computerblade spacehey,computerblade windows,windows site,computerblade blog,computerblade portfolio,computerblade site,computerblade website">
-    <link rel="stylesheet" href="node_modules/7.css/dist/7.css" />
-    <link rel="stylesheet" href="https://unpkg.com/7.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
-    <link rel="shortcut icon" href="icons/favicon.png" type="image/x-icon">
-    <link rel="icon" href="icons/favicon.png" type="image/x-icon">
-    <style>
-      body,
-      html {
-        height: 100%;
-        width: 100%;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@computerblade's Website! - Desktop Page</title>
+  <meta name="description" content="@computerblade's Website, meet him on Discord, SpaceHey, Reddit, etc...">
+  <meta name="keywords"
+    content="computerblade,computerblade-official,windows 7,windows,website,portfolio,computerblade github, computerblade Discord, computerblade spacehey,computerblade windows,windows site,computerblade blog,computerblade portfolio,computerblade site,computerblade website">
+  <link rel="stylesheet" href="node_modules/7.css/dist/7.css" />
+  <link rel="stylesheet" href="https://unpkg.com/7.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+  <link rel="shortcut icon" href="icons/favicon.png" type="image/x-icon">
+  <link rel="icon" href="icons/favicon.png" type="image/x-icon">
+  <style>
+    body,
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      display: flex;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    .taskbar {
+      max-width: 100%;
+      width: 100%;
+      height: 40px;
+      background: url(taskbars/1.png);
+      background-size: 100% 40px;
+      color: white;
+      display: flex;
+      z-index: 10;
+      bottom: 0;
+      position: fixed;
+    }
+
+    #timedate {
+      margin-left: auto;
+      margin-right: 10px;
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    br {
+      display: block;
+      margin: 0px 0;
+    }
+
+    #mydivheader:hover {
+      cursor: move;
+    }
+
+    #mydiv:dragging {
+      cursor: grabbing;
+    }
+
+    #c {
+      height: 100%;
+      width: 100vw;
+      /* display: table; */
+      display: flex;
+          
+          justify-content: center;
+          align-items: center;
+    }
+
+    .shortcut {
+      z-index: -99;
+      width: min-content;
+      height: min-content;
+    }
+
+    @keyframes windowOpen {
+      0% {
+        opacity: 0.3;
+        transform: perspective(600px) rotateX(-13deg) translateY(0) scale(0.85);
       }
 
-      body {
-        display: flex;
-        margin: 0;
-        flex-direction: column;
+      100% {
+        opacity: 1;
+        transform: perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1);
       }
+    }
+  </style>
+  <meta property="og:title" content="@computerblade's Website">
+  <meta property="og:description" content="@computerblade's Website, meet him on Discord, SpaceHey, Reddit, etc...">
+  <meta property="og:image" content="https://computerblade.is-a.dev/icons/favicon.png">
+  <meta property="og:url" content="https://computerblade.is-a.dev/">
+  <meta property="og:type" content="website">
+  <script>
+    /*to prevent Firefox FOUC, this must be here*/
+    let FF_FOUC_FIX;
+  </script>
+</head>
 
-      .taskbar {
-        max-width: 100%;
-        width: 100%;
-        height: 40px;
-        background: url(taskbars/1.png);
-        background-size: 100% 40px;
-        color: white;
-        display: flex;
-        z-index: 10;
-        bottom: 0;
-        position: fixed;
-      }
-
-      #timedate {
-        margin-left: auto;
-        margin-right: 10px;
-        margin-top: 4px;
-        text-align: right;
-      }
-
-      br {
-        display: block;
-        margin: 0px 0;
-      }
-
-      #mydivheader:hover {
-        cursor: move;
-      }
-
-      #mydiv:dragging {
-        cursor: grabbing;
-      }
-
-      #c {
-        height: 100%;
-        width: 100vw;
-      }
-
-      .shortcut {
-        z-index: -99;
-        width: min-content;
-        height: min-content;
-      }
-    </style>
-    <meta property="og:title" content="@computerblade's Website">
-    <meta property="og:description" content="@computerblade's Website, meet him on Discord, SpaceHey, Reddit, etc...">
-    <meta property="og:image" content="https://computerblade.is-a.dev/icons/favicon.png">
-    <meta property="og:url" content="https://computerblade.is-a.dev/">
-    <meta property="og:type" content="website">
-    <script>
-      /*to prevent Firefox FOUC, this must be here*/
-      let FF_FOUC_FIX;
-    </script>
-  </head>
-  <body
-    style="
+<body style="
       background: url('bg.jpg') no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      display: flex;
       justify-content: center;
       align-items: center;
-    "
-    onload="detectIfMobile()"
-  >
-    <div id="c">
-      
-      <div
-        class="window active"
-        style="
+    " onload="detectIfMobile()">
+  <div id="c">
+
+    <div class="window active" style="
           min-width: 750px;
           max-width: 750px;
           min-height: 575px;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          z-index: 5;
           
-        "
-        id="mydiv"
-      >
-        <div class="title-bar" id="mydivheader">
-          <div class="title-bar-text">@computerblade's Website</div>
-          <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize" disabled></button>
-            <button aria-label="Close" onclick="closeWindow();"></button>
-          </div>
-        </div>
-        <div class="window-body has-space" style="min-height: 575px">
-          <section class="tabs" style="min-height: 575px">
-            <menu role="tablist" aria-label="Tabs Template">
-              <button role="tab" aria-controls="tab-A" aria-selected="true">
-                Home
-              </button>
-              <button role="tab" aria-controls="tab-B">Projects</button>
-              <button role="tab" aria-controls="tab-C">Contact</button>
-              <button role="tab" aria-controls="tab-D">Friends</button>
-            </menu>
-            <article role="tabpanel" id="tab-A" style="min-height: 575px">
-              <h1 style="display: none;">for seo only</h1><h2 style="display: none;">for seo only</h2>
-              <h3>Hi</h3>
-              <p>
-                I'm
-                <a href="https://github.com/computerblade-official"
-                  >@computerblade</a
-                >. Most of my day I spend as a programmer, and am also
-                technology hobbyist. I am a teenager trying to seek more
-                knowledge about technology and talents for it. Here is the place
-                where I will discuss all about it!
-              </p>
-              <h3>Skills</h3>
-              <p>
-                I have made many projects in the past using Java, C, C++, C#,
-                and much more! I also know how to use applications like Excel,
-                Adobe Photoshop, etc.
-              </p>
-              <p style="color: white">&nbsp; ****</p>
-              <div style="display: flex">
-                <img
-                  src="skills-logos/c.png"
-                  alt="c"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/cpp.png"
-                  alt="c++"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/csharp.png"
-                  alt="c#"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/html.png"
-                  alt="html"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/css.png"
-                  alt="css"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/java.png"
-                  alt="java"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/javascript.png"
-                  alt="javascript"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/photoshop.png"
-                  alt="photoshop"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/illustrator.png"
-                  alt="illustrator"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/premiere_pro.png"
-                  alt="premiere_pro"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/excel.jpg"
-                  alt="excel"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/windows.png"
-                  alt="windows"
-                  width="60"
-                  height="50"
-                />&nbsp;&nbsp;
-              </div>
-              <h3>Software I use for coding</h3>
-              <div style="display: flex">
-                <img
-                  src="skills-logos/vs.png"
-                  alt="visual studio"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/vscode.svg"
-                  alt="visual studio code"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/github-original.svg"
-                  alt="github"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/githubcodespaces-original.svg"
-                  alt="github codespaces"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-                <img
-                  src="skills-logos/nodejs-original.svg"
-                  alt="nodejs"
-                  width="50"
-                  height="50"
-                />&nbsp;&nbsp;
-              </div>
-              <p style="color: white">&nbsp; ****</p>
-              Check out my projects by clicking the 'Projects' tab, and no I will neither be adding a start menu nor a set of shortcut icons for the desktop and taskbar, but you can click the start button anyway I guess.
-            </article>
-
-            <article
-              role="tabpanel"
-              id="tab-B"
-              hidden
-              style="min-height: 575px"
-            >
-              No projects to be displayed as of yet. Meanwhile check out my
-              socials!
-            </article>
-            <article
-              role="tabpanel"
-              id="tab-C"
-              hidden
-              style="min-height: 575px"
-            >
-              <h3>Contact me via</h3>
-              Discord: <a href="">@ayproductions5051</a><br />
-              SpaceHey:
-              <a href="https://spacehey.com/computerblade">@computerblade</a
-              ><br />
-              Reddit: <a href="https://www.reddit.com/u/NEXT-IDE">u/NEXT-IDE</a
-              ><br />
-              Email:
-              <a href="mailto:ayproductionsteam@gmail.com"
-                >ayproductionsteam@gmail.com</a
-              ><br />
-              <p>
-                Please note that I rarely check my emails. It is better to reach
-                out via Discord since I'm the most active there.
-              </p>
-              <p>
-                You can also add me as a friend by sending me a friend request
-                on Discord and SpaceHey! I will add you as a friend on the list
-                too (with your website link)!
-              </p>
-            </article>
-            <article
-              role="tabpanel"
-              id="tab-D"
-              hidden
-              style="min-height: 575px"
-            >
-              <h3>Friends</h3>
-              <ul type="square">
-                <li><a href="https://aquiffoo.vercel.app/">aquiffoo</a></li>
-                <li>
-                  <a href="https://adrianotechwebsite.web.app/">adrianotech</a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.youtube.com/channel/UCpL-a3P9w63fj9nK8_a8zHQ"
-                    >ajrryt</a
-                  >
-                  (No website, link to their YouTube channel)
-                </li>
-                <li>
-                  <a href="https://github.com/Theta69">pirotehnice (D⌁rk)</a>
-                  (No website, link to their GitHub profile)
-                </li>
-                <li><a href="https://www.gizzy.pro/">gizzyowo</a></li>
-                <li><a href="https://helloyunho.xyz">helloyunho</a></li>
-                <li><a href="https://ploszukiwacz.tech/">ploszukiwacz</a></li>
-                <li>
-                  <a href="https://quincetart10.is-a.dev">quincetart10</a>
-                </li>
-                <li><a href="https://ryz.is-a.dev/">4ryz</a></li>
-                <li>
-                  <a href="#" style="color: red">some_one.jpg</a> (Links were
-                  not found)
-                </li>
-                <li>
-                  <a href="https://github.com/SypTitan">syptitan</a> (No
-                  website, link to their GitHub profile)
-                </li>
-                <li><a href="https://creeperita104.is-a.dev/bio/">creeperita104</a></li>
-              </ul>
-            </article>
-          </section>
+          z-index: 5;
+          animation:.5s windowOpen cubic-bezier(.19,1,.22,1);
+        " id="mydiv">
+      <div class="title-bar" id="mydivheader">
+        <div class="title-bar-text">@computerblade's Website</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize" disabled></button>
+          <button aria-label="Close" onclick="closeWindow();"></button>
         </div>
       </div>
-    </div>
-    <div class="taskbar">
-        &nbsp;&nbsp;<img
-          src="orb.png"
-          alt="Windows 7 Start Button"
-          width="40"
-          height="40"
-          onclick="displayWindow()"
-          style="z-index: 99"
-        />
-        
-        <div id="timedate">
-          <span id="time">12:00 AM</span><br />
-          <!--Placeholder time & date-->
-          <span id="date">01-01-2024</span>
-        </div>
+      <div class="window-body has-space" style="min-height: 575px">
+        <section class="tabs" style="min-height: 575px">
+          <menu role="tablist" aria-label="Tabs Template">
+            <button role="tab" aria-controls="tab-A" aria-selected="true">
+              Home
+            </button>
+            <button role="tab" aria-controls="tab-B">Projects</button>
+            <button role="tab" aria-controls="tab-C">Contact</button>
+            <button role="tab" aria-controls="tab-D">Friends</button>
+          </menu>
+          <article role="tabpanel" id="tab-A" style="min-height: 575px">
+            <h1 style="display: none;">for seo only</h1>
+            <h2 style="display: none;">for seo only</h2>
+            <h3>Hi</h3>
+            <p>
+              I'm
+              <a href="https://github.com/computerblade-official">@computerblade</a>. Most of my day I spend as a
+              programmer, and am also
+              technology hobbyist. I am a teenager trying to seek more
+              knowledge about technology and talents for it. Here is the place
+              where I will discuss all about it!
+            </p>
+            <h3>Skills</h3>
+            <p>
+              I have made many projects in the past using Java, C, C++, C#,
+              and much more! I also know how to use applications like Excel,
+              Adobe Photoshop, etc.
+            </p>
+            <p style="color: white">&nbsp; ****</p>
+            <div style="display: flex">
+              <img src="skills-logos/c.png" alt="c" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/cpp.png" alt="c++" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/csharp.png" alt="c#" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/html.png" alt="html" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/css.png" alt="css" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/java.png" alt="java" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/javascript.png" alt="javascript" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/photoshop.png" alt="photoshop" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/illustrator.png" alt="illustrator" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/premiere_pro.png" alt="premiere_pro" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/excel.jpg" alt="excel" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/windows.png" alt="windows" width="60" height="50" />&nbsp;&nbsp;
+            </div>
+            <h3>Software I use for coding</h3>
+            <div style="display: flex">
+              <img src="skills-logos/vs.png" alt="visual studio" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/vscode.svg" alt="visual studio code" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/github-original.svg" alt="github" width="50" height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/githubcodespaces-original.svg" alt="github codespaces" width="50"
+                height="50" />&nbsp;&nbsp;
+              <img src="skills-logos/nodejs-original.svg" alt="nodejs" width="50" height="50" />&nbsp;&nbsp;
+            </div>
+            <p style="color: white">&nbsp; ****</p>
+            Check out my projects by clicking the 'Projects' tab, and no I will neither be adding a start menu nor a set
+            of shortcut icons for the desktop and taskbar, but you can click the start button anyway I guess.
+          </article>
+
+          <article role="tabpanel" id="tab-B" hidden style="min-height: 575px">
+            No projects to be displayed as of yet. Meanwhile check out my
+            socials!
+          </article>
+          <article role="tabpanel" id="tab-C" hidden style="min-height: 575px">
+            <h3>Contact me via</h3>
+            Discord: <a href="">@ayproductions5051</a><br />
+            SpaceHey:
+            <a href="https://spacehey.com/computerblade">@computerblade</a><br />
+            Reddit: <a href="https://www.reddit.com/u/NEXT-IDE">u/NEXT-IDE</a><br />
+            Email:
+            <a href="mailto:ayproductionsteam@gmail.com">ayproductionsteam@gmail.com</a><br />
+            <p>
+              Please note that I rarely check my emails. It is better to reach
+              out via Discord since I'm the most active there.
+            </p>
+            <p>
+              You can also add me as a friend by sending me a friend request
+              on Discord and SpaceHey! I will add you as a friend on the list
+              too (with your website link)!
+            </p>
+          </article>
+          <article role="tabpanel" id="tab-D" hidden style="min-height: 575px">
+            <h3>Friends</h3>
+            <ul type="square">
+              <li><a href="https://aquiffoo.vercel.app/">aquiffoo</a></li>
+              <li>
+                <a href="https://adrianotechwebsite.web.app/">adrianotech</a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UCpL-a3P9w63fj9nK8_a8zHQ">ajrryt</a>
+                (No website, link to their YouTube channel)
+              </li>
+              <li>
+                <a href="https://github.com/Theta69">pirotehnice (D⌁rk)</a>
+                (No website, link to their GitHub profile)
+              </li>
+              <li><a href="https://www.gizzy.pro/">gizzyowo</a></li>
+              <li><a href="https://helloyunho.xyz">helloyunho</a></li>
+              <li><a href="https://ploszukiwacz.tech/">ploszukiwacz</a></li>
+              <li>
+                <a href="https://quincetart10.is-a.dev">quincetart10</a>
+              </li>
+              <li><a href="https://ryz.is-a.dev/">4ryz</a></li>
+              <li>
+                <a href="#" style="color: red">some_one.jpg</a> (Links were
+                not found)
+              </li>
+              <li>
+                <a href="https://github.com/SypTitan">syptitan</a> (No
+                website, link to their GitHub profile)
+              </li>
+              <li><a href="https://creeperita104.is-a.dev/bio/">creeperita104</a></li>
+            </ul>
+          </article>
+        </section>
       </div>
     </div>
-    <script src="script.js"></script>
-    <script>
-      function detectIfMobile() {
-        if (
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-        ) {
-          // true for mobile device
-          window.location.replace("mobile.html");
-        } else {
-          // false for not mobile device
-          console.log("not mobile device");
-          // alignWinProperly();
-        }
+  </div>
+  <div class="taskbar">
+    &nbsp;&nbsp;<img src="orb.png" alt="Windows 7 Start Button" width="40" height="40" onclick="displayWindow()"
+      style="z-index: 99" />
+
+    <div id="timedate">
+      <span id="time">12:00 AM</span><br />
+      <!--Placeholder time & date-->
+      <span id="date">01-01-2024</span>
+    </div>
+  </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function detectIfMobile() {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        // true for mobile device
+        window.location.replace("mobile.html");
+      } else {
+        // false for not mobile device
+        console.log("not mobile device");
+        // alignWinProperly();
+      }
+    }
+
+    function displayWindow() {
+      var win = document.getElementById('mydiv');
+      if (mydiv.style.display == 'block') {
+        mydiv.style.display = 'none';
+      } else {
+        mydiv.style.display = 'block';
+      }
+    }
+
+    var d;
+    var m;
+    var h;
+    function time() {
+      var d = new Date();
+      m = d.getMinutes();
+      h = d.getHours();
+      if (h < 12) {
+        document.getElementById("time").textContent =
+          (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + " AM";
+      } else {
+        h -= 12;
+        document.getElementById("time").textContent =
+          (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + " PM";
       }
 
-      function displayWindow() {
-        var win = document.getElementById('mydiv');
-        if (mydiv.style.display == 'block') {
-          mydiv.style.display = 'none';
-        } else {
-          mydiv.style.display = 'block';
-        }
+      if (h < 10) {
+        h = "0" + h;
+      } else {
+        m = "" + m;
       }
+    }
 
-      var d;
-      var m;
-      var h;
-      function time() {
-        var d = new Date();
-        m = d.getMinutes();
-        h = d.getHours();
-        if (h < 12) {
-          document.getElementById("time").textContent =
-            (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + " AM";
-        } else {
-          h -= 12;
-          document.getElementById("time").textContent =
-            (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + " PM";
-        }
-
-        if (h < 10) {
-          h = "0" + h;
-        } else {
-          m = "" + m;
-        }
+    function date() {
+      var d = new Date();
+      var day = d.getDate();
+      var mon = d.getMonth() + 1;
+      var y = d.getFullYear();
+      if (day < 10) {
+        day = "0" + day;
       }
-
-      function date() {
-        var d = new Date();
-        var day = d.getDate();
-        var mon = d.getMonth() + 1;
-        var y = d.getFullYear();
-        if (day < 10) {
-          day = "0" + day;
-        }
-        if (mon < 10) {
-          mon = "0" + mon;
-        }
-        document.getElementById("date").textContent = day + "-" + mon + "-" + y;
+      if (mon < 10) {
+        mon = "0" + mon;
       }
+      document.getElementById("date").textContent = day + "-" + mon + "-" + y;
+    }
 
-      // dragElement(document.getElementById("mydiv"));
+    // dragElement(document.getElementById("mydiv"));
 
-      $(function () {
-        $("#mydiv").draggable({ containment: "parent" });
-      });
+    $(function () {
+      $("#mydiv").draggable({ containment: "parent" });
+    });
 
-      function closeWindow() {
-        document.getElementById("mydiv").style.display = "none";
-      }
+    function closeWindow() {
+      document.getElementById("mydiv").style.display = "none";
+    }
 
-      function openWindow() {
-        document.getElementById("mydiv").style.display = "block";
-      }
+    function openWindow() {
+      document.getElementById("mydiv").style.display = "block";
+    }
 
-      setInterval(time, 1000);
-      setInterval(date, 1000);
-    </script>
-  </body>
+    setInterval(time, 1000);
+    setInterval(date, 1000);
+  </script>
+</body>
+
 </html>
