@@ -678,7 +678,8 @@
       triggerSM();
       switch (programToOpen) {
         case 'website':
-          displayWindow();
+          var win = document.getElementById('mydiv');
+          mydiv.style.display = 'block';
           sdmenu.style.display = 'none';
           break;
       
