@@ -92,16 +92,295 @@
       }
     }
 
-    @keyframes windowClose { /* maybe unused temporarily */
+    @keyframes windowClose {
       0% {
-        opacity: 0.3;
-        transform: perspective(600px) rotateX(0deg) translateY(0) scale(0.85);
+        opacity: 1;
+        transform: perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1);
       }
 
       100% {
-        opacity: 1;
-        transform: perspective(600px) rotateX(13deg) rotateY(0deg) translateY(0px) scale(1);
+        opacity: 0.3;
+        transform: perspective(600px) rotateX(-13deg) translateY(0) scale(0.85);
       }
+    }
+
+    .window.active.closing {
+       animation: .5s windowClose cubic-bezier(.19,1,.22,1);
+       display: none;
+    }
+
+    .start-menu {
+      position: absolute;
+      bottom: 40px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      height: 411px;
+      font-size: 9pt;
+      background: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,.3333333333)),color-stop(15%,rgba(0,0,0,.5333333333)),to(rgba(0,0,0,.1333333333)));
+      padding: 7px;
+      border: 1px solid #555;
+      border-radius: 8px 8px 0 0;
+      -webkit-box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.3333333333);
+      box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.3333333333);
+      background: linear-gradient(rgba(0,0,0,.3333333333),rgba(0,0,0,.5333333333) 15% 60%,rgba(0,0,0,.1333333333));
+      background-color: rgba(0, 0, 0, 0);
+      left: 0;
+    }
+
+    .start-menu .programs {
+      width: 247px;
+      position: relative;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      background: #fff;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,.6666666667);
+      -webkit-box-shadow: 0 0 0 1px hsla(0,0%,100%,.3333333333);
+      box-shadow: 0 0 0 1px hsla(0,0%,100%,.3333333333);
+    }
+
+    .programs-list {
+      padding: 2px;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .start-menu .links {
+      width: 140px;
+      color: #fff;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      padding:40px 1px 2px 7px
+    }
+
+    .start-menu .account {
+      padding: 0px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      position: absolute;
+      top: -45px;
+      min-width: 0;
+    }
+
+    .start-menu .links .link {
+      padding: 3px 5px;
+      margin: 2px 0;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      -webkit-transition: all .15s;
+      transition: all .15s;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    #start-menu .link:not(:last-child):hover {
+      background-image:-webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.1019607843)),color-stop(40%,hsla(0,0%,100%,.2)),color-stop(60%,hsla(0,0%,100%,.2)),to(rgba(0,0,0,.1019607843))),-webkit-gradient(linear,left top,left bottom,from(hsla(0,0%,100%,.2)),color-stop(48%,hsla(0,0%,100%,.1019607843)),color-stop(50%,rgba(0,0,0,.4)),color-stop(98%,transparent));
+      border:1px solid rgba(0,0,0,.6666666667);
+      -webkit-box-shadow:inset 0 0 0 1px hsla(0,0%,100%,.3333333333),0 0 0 1px hsla(0,0%,100%,.2);
+      box-shadow:inset 0 0 0 1px hsla(0,0%,100%,.3333333333),0 0 0 1px hsla(0,0%,100%,.2);
+      background-image:linear-gradient(90deg,rgba(0,0,0,.1019607843),hsla(0,0%,100%,.2) 40%,hsla(0,0%,100%,.2) 60%,rgba(0,0,0,.1019607843)),linear-gradient(180deg,hsla(0,0%,100%,.2),hsla(0,0%,100%,.1019607843) 48%,rgba(0,0,0,.4) 50%,transparent 98%);
+
+    }
+
+    #start-menu .link.has-line {
+      margin-bottom:6px
+    }
+
+    #start-menu .link.has-line:after {
+      width:calc(100% - 5px);
+      height:3px;
+      position:absolute;
+      bottom:-5px;
+      content:"";
+      -webkit-box-shadow:inset 0 1px 0 rgba(0,0,0,.1333333333),inset 0 -1px 0 hsla(0,0%,100%,.1333333333);
+      box-shadow:inset 0 1px 0 rgba(0,0,0,.1333333333),inset 0 -1px 0 hsla(0,0%,100%,.1333333333);
+    }
+
+    .button-group {
+      margin: 30px 0 0 3px;
+      text-align: center;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      color: currentColor;
+    }
+
+    .button-group:first-child {
+      min-width:50px;
+      border:1px solid rgba(0,0,0,.4666666667);
+      -webkit-box-shadow:inset 0 0 0 1px hsla(0, 0%, 15%, 0.667);
+      box-shadow:inset 0 0 0 1px hsla(0,0%,100%,.6666666667);
+      border-radius:3px 0 0 3px;
+      border-right: none;
+    }
+
+    .button-group>.l-button:last-child {
+      border:1px solid rgba(0,0,0,.4666666667);
+      -webkit-box-shadow:inset 0 0 0 1px hsla(0,0%,100%,.6666666667);
+      box-shadow:inset 0 0 0 1px hsla(0,0%,100%,.6666666667);
+    }
+
+    .button-group > .l-button:first-child {
+      border-radius: 3px 0 0 3px;
+      border: 1px solid rgba(0,0,0,.4666666667);
+      -webkit-box-shadow: inset 0 0 0 1px hsla(0, 0%, 28%, 0.667);
+      box-shadow: inset 0 0 0 1px hsla(0,0%,28%,0.667);
+      min-width: 50px;
+      /* -webkit-box-shadow: inset 0 0 2px #fff,inset 0 1px 3px hsla(0,0%,100%,.6),0 1px 1px rgba(0,0,0,.8),-1px -1px 1px rgba(0,0,0,.2),1px -1px 1px rgba(0,0,0,.2); */
+      /* box-shadow: inset 0 0 2px #fff,inset 0 1px 3px hsla(0,0%,100%,.6),0 1px 1px rgba(0,0,0,.8),-1px -1px 1px rgba(0,0,0,.2),1px -1px 1px rgba(0,0,0,.2); */
+      padding: 6px;
+      border: 0;
+      background: linear-gradient(180deg,hsla(0,0%,100%,.5019607843),hsla(0,0%,100%,.2) 40%,rgba(39,71,86,.5019607843) 50%,rgba(39,71,86,.1019607843) 90%,hsla(0,0%,100%,.5019607843));
+      color: #fff;
+      background: -webkit-gradient(linear,left top,left bottom,from(hsla(0,0%,100%,.5019607843)),color-stop(40%,hsla(0,0%,100%,.2)),color-stop(50%,rgba(39,71,86,.5019607843)),color-stop(90%,rgba(39,71,86,.1019607843)),to(hsla(0,0%,100%,.5019607843)));
+      cursor:default;
+    }
+
+    .button-group > .l-button:last-child {
+      border-radius: 0 3px 3px 0;
+      border: 1px solid rgba(0,0,0,.4666666667);
+      -webkit-box-shadow: inset 0 0 0 1px hsla(0, 0%, 28%, 0.667);
+      box-shadow: inset 0 0 0 1px hsla(0,0%,28%,0.667);
+      /* box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.6666666667); */
+      min-width: 12px;
+      /* -webkit-box-shadow: inset 0 0 2px #fff,inset 0 1px 3px hsla(0,0%,100%,.6),0 1px 1px rgba(0,0,0,.8),-1px -1px 1px rgba(0,0,0,.2),1px -1px 1px rgba(0,0,0,.2); */
+      /* box-shadow: inset 0 0 2px #fff,inset 0 1px 3px hsla(0,0%,100%,.6),0 1px 1px rgba(0,0,0,.8),-1px -1px 1px rgba(0,0,0,.2),1px -1px 1px rgba(0,0,0,.2); */
+      padding: 6px;
+      border: 0;
+      background: linear-gradient(180deg,hsla(0,0%,100%,.5019607843),hsla(0,0%,100%,.2) 40%,rgba(39,71,86,.5019607843) 50%,rgba(39,71,86,.1019607843) 90%,hsla(0,0%,100%,.5019607843));
+      color: #fff;
+      background: -webkit-gradient(linear,left top,left bottom,from(hsla(0,0%,100%,.5019607843)),color-stop(40%,hsla(0,0%,100%,.2)),color-stop(50%,rgba(39,71,86,.5019607843)),color-stop(90%,rgba(39,71,86,.1019607843)),to(hsla(0,0%,100%,.5019607843)));
+    }
+    
+    .button-group:hover>.l-button:first-child,
+    .button-group:hover>.l-button:last-child {
+      -webkit-box-shadow:inset 0 0 2px 1px #fff;
+      box-shadow:inset 0 0 2px 1px #fff;
+    }
+
+
+
+    .button-ext {
+      min-width:12px;
+      position:relative;
+      cursor:default;
+    }
+
+    .button-ext i {
+      text-shadow: 0 0 1px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000;
+    }
+
+    .program::before {
+      right: 0;
+      left: 0;
+      border-radius: 3px;
+      border: 1px solid #7da2ce;
+      -webkit-box-shadow: inset 0 0 0 1px #fff;
+      box-shadow: inset 0 0 0 1px #fff;
+    }
+
+    .program::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: -1;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      background: var(--icon) no-repeat 2px/18px,-webkit-gradient(linear,left top,left bottom,from(#ddecfd),to(#c2dcfd)) no-repeat 0;
+      opacity: 0;
+    }
+
+    tr:nth-child(even) {
+      padding: 0;
+    }
+
+    tr:nth-child(odd) {
+      padding: 10px;
+    }
+
+    tr img {
+      -webkit-filter: drop-shadow(2px 2px 5px rgba(0,0,0,.5333333333)) contrast(1.3);
+      filter: drop-shadow(2px 2px 5px rgba(0,0,0,.5333333333)) contrast(1.3);
+      cursor: pointer;
+    }
+
+    .program.featured {
+      padding-left: 40px;
+      min-height: 12.5%;
+    }
+
+    .program {
+      padding-left: 28px;
+      text-align: left;
+      border-radius: 3px;
+      padding: 6px;
+      padding-left: 6px;
+      border: 1px solid transparent;
+      color: inherit;
+      font: inherit;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      outline: none;
+      border: none;
+    }
+
+    .program.featured.program1::before,
+    .program.featured.program1::after {
+      -webkit-box-sizing: border-box; 
+      -moz-box-sizing: border-box;    
+      box-sizing: border-box;         
+      background: url('icons/netcenter_7/256.png') no-repeat 2px/28px,linear-gradient(180deg,#ddecfd,#c2dcfd) no-repeat 0;
+      border: 0.1px solid #7da2ce;
+    }
+
+    .program.featured, .program.featured.program1 {
+      border: none;
+      outline: none;
+    }
+
+    .start-menu.fade {
+      animation: fade 0.4s linear;
+    }
+
+    @keyframes fade {
+      0% { opacity: 0 }
+      50%,100% { opacity: 1 }
     }
   </style>
   <meta property="og:title" content="@computerblade's Website">
@@ -113,6 +392,7 @@
     /*to prevent Firefox FOUC, this must be here*/
     let FF_FOUC_FIX;
   </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body style="
@@ -135,7 +415,7 @@
           
           z-index: 5;
           animation:.5s windowOpen cubic-bezier(.19,1,.22,1);
-        " id="mydiv">
+        " id="mydiv" ondrag="hideSM()">
       <div class="title-bar" id="mydivheader">
         <div class="title-bar-text">@computerblade's Website</div>
         <div class="title-bar-controls">
@@ -197,8 +477,7 @@
               <img src="skills-logos/nodejs-original.svg" alt="nodejs" width="50" height="50" />&nbsp;&nbsp;
             </div>
             <p style="color: white">&nbsp; ****</p>
-            Check out my projects by clicking the 'Projects' tab, and no I will neither be adding a start menu nor a set
-            of shortcut icons for the desktop and taskbar, but you can click the start button anyway I guess.
+            Check out my projects by clicking the 'Projects' tab!
           </article>
 
           <article role="tabpanel" id="tab-B" hidden style="min-height: 575px">
@@ -223,41 +502,99 @@
               too (with your website link)!
             </p>
           </article>
-          <article role="tabpanel" id="tab-D" hidden style="min-height: 575px">
-            <h3>Friends</h3>
-            <ul type="square">
-              <li><a href="https://aquiffoo.vercel.app/">aquiffoo</a></li>
-              <li>
-                <a href="https://adrianotechwebsite.web.app/">adrianotech</a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com/channel/UCpL-a3P9w63fj9nK8_a8zHQ">ajrryt</a>
-                (No website, link to their YouTube channel)
-              </li>
-              <li>
-                <a href="https://github.com/Theta69">pirotehnice (D⌁rk)</a>
-                (No website, link to their GitHub profile)
-              </li>
-              <li><a href="https://www.gizzy.pro/">gizzyowo</a></li>
-              <li><a href="https://helloyunho.xyz">helloyunho</a></li>
-              <li><a href="https://ploszukiwacz.tech/">ploszukiwacz</a></li>
-              <li>
-                <a href="https://quincetart10.is-a.dev">quincetart10</a>
-              </li>
-              <li><a href="https://ryz.is-a.dev/">4ryz</a></li>
-              <li>
-                <a href="#" style="color: red">some_one.jpg</a> (Links were
-                not found)
-              </li>
-              <li>
-                <a href="https://github.com/SypTitan">syptitan</a> (No
-                website, link to their GitHub profile)
-              </li>
-              <li><a href="https://creeperita104.is-a.dev/bio/">creeperita104</a></li>
-              <li>
-                <a href="https://mateishome.page/">Goober (Matei)</a>
-              </li>
-            </ul>
+          <article role="tabpanel" id="tab-D" hidden style="min-height: 575px;height:575px;overflow:scroll;text-align: center;">
+            <h3 align="left" style="text-align: left;">Friends</h3>
+            <table border="0" bordercolor="white" cellspacing="0">
+              <tr>
+                <td>
+                  <img src="icons/friend_avatars/aquiffoo.png" alt="" onclick="window.open('https://aquiffoo.vercel.app/', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/matei.png" alt="" onclick="window.open('https://mateishome.page/', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/ploszukiwacz.png" alt="" onclick="window.open('https://ploszukiwacz.tech/', '_blank')">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://aquiffoo.vercel.app/" style="text-align: left;" target="_blank">aquiffoo</a>
+                </td>
+                <td>
+                  <a href="#" style="text-align: left;" target="_blank">Goober (Matei)</a>
+                </td>
+                <td>
+                  <a href="https://ploszukiwacz.tech/" style="text-align: left;" target="_blank">ploszukiwacz</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="icons/friend_avatars/adrianotech.png" alt="" onclick="window.open('https://adrianotechwebsite.web.app/', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/ajrryt.png" alt="" onclick="window.open('https://www.youtube.com/channel/UCpL-a3P9w63fj9nK8_a8zHQ', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/dork.png" alt="" onclick="window.open('https://github.com/Theta69', '_blank')">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://adrianotechwebsite.web.app/" style="text-align: left;" target="_blank">adrianotech</a>
+                </td>
+                <td>
+                  <a href="https://www.youtube.com/channel/UCpL-a3P9w63fj9nK8_a8zHQ" style="text-align: left;" target="_blank">ajrryt</a>
+                </td>
+                <td>
+                  <a href="https://github.com/Theta69" style="text-align: left;" target="_blank">D⌁rk</a>
+                </td>
+              </tr>
+              <tr>
+              <tr>
+                <td>
+                  <img src="icons/friend_avatars/gizzyowo.png" alt="" onclick="window.open('https://www.gizzy.pro/', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/helloyunho.png" alt="" onclick="window.open('https://helloyunho.xyz', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/quincetart10.png" alt="" onclick="window.open('https://quincetart10.is-a.dev', '_blank')">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://www.gizzy.pro/" style="text-align: left;" target="_blank">gizzyuwu</a>
+                </td>
+                <td>
+                  <a href="https://helloyunho.xyz" style="text-align: left;" target="_blank">helloyunho</a>
+                </td>
+                <td>
+                  <a href="https://quincetart10.is-a.dev" style="text-align: left;" target="_blank">quincetart10</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="icons/friend_avatars/4ryz.png" alt="" onclick="window.open('https://ryz.is-a.dev/', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/syptitan.png" alt="" onclick="window.open('https://github.com/SypTitan', '_blank')">
+                </td>
+                <td>
+                  <img src="icons/friend_avatars/creeperita104.png" alt="" onclick="window.open('https://creeperita104.is-a.dev/bio/', '_blank')">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://ryz.is-a.dev/" style="text-align: left;" target="_blank">4ryz</a>
+                </td>
+                <td>
+                  <a href="https://github.com/SypTitan" style="text-align: left;" target="_blank">syptitan</a>
+                </td>
+                <td>
+                  <a href="https://creeperita104.is-a.dev/bio/" style="text-align: left;" target="_blank">creeperita104</a>
+                </td>
+              </tr>
+            </table>
           </article>
         </section>
       </div>
@@ -266,11 +603,55 @@
 
   <!-- Here lies:
     Website Start menu (for now) -->
-    <img src="icons/guest.webp" alt="guest" srcset="">
+
+    <div class="start-menu" id="start-menu" style="display: none;">
+      <div class="programs">
+        <button class="program featured program1" onclick="openProgram('website')" style="background: url('icons/netcenter_7/256.png') no-repeat 3px/28px;"> Website </button>
+      </div>
+      <div class="links">
+        <div class="account" style="padding: 0px">
+          <div
+            class="img no-name"
+            style="margin: 0;padding: 13px;background-image: url('icons/guest-user.png');background-repeat: no-repeat;background-position: 50%;background-size: cover;width: 50px;height: 50px;-webkit-filter: drop-shadow(2px 2px 5px rgba(0,0,0,.5333333333)) contrast(1.3);filter: drop-shadow(2px 2px 5px rgba(0,0,0,.5333333333)) contrast(1.3);"
+          >
+            <img src="icons/guest.png" width="50" height="50" alt="" style="display: none; border: 1px solid #555;border-radius: 3px;margin: auto;-webkit-box-shadow: 0 0 0 1px hsla(0,0%,100%,.3333333333);box-shadow: 0 0 0 1px hsla(0,0%,100%,.3333333333);-ms-flex-item-align: center;align-self: center;-webkit-filter: contrast(.7);filter: contrast(.7);"/>
+          </div>
+          <!---->
+        </div>
+        <div class="link">Documents</div>
+        <div class="link">Pictures</div>
+        <div class="link">Music</div>
+        <div class="link has-line">Computer</div>
+        <div class="link">Control Panel</div>
+        <div class="link">Default Programs</div>
+        <div class="link">Help and Support</div>
+        <div class="button-group">
+          <div class="l-button">Shut down</div>
+          <div class="l-button button-ext" onclick="SDmenu();">
+            <i class="fa fa-caret-right"></i>
+            <ul role="menu" class="menu" style="display: none;" id="SMM" style="position:absolute;top:0;left:0;">
+              <li role="menuitem">
+                <button>Switch User</button>
+              </li>
+              <li role="menuitem">
+                <button>Log off</button>
+              </li>
+              <li role="menuitem">
+                <button>Restart</button>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
     
+
   <div class="taskbar">
-    &nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/computerblade-official/cdn.computerblade/project/computerblade-official.github.io/orb.png" alt="Windows 7 Start Button" width="40" height="40" onclick="displayWindow()"
-      style="z-index: 99" />
+    &nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/computerblade-official/cdn.computerblade/project/computerblade-official.github.io/orb.png" alt="Windows 7 Start Button" width="40" height="40" onclick="triggerSM()"
+      style="z-index: 99" id="start-button"/>
 
     <div id="timedate">
       <span id="time">12:00 AM</span><br />
@@ -281,6 +662,43 @@
   </div>
   <script src="script.js"></script>
   <script>
+    var sm = document.getElementById("start-menu");
+    var sdmenu = document.getElementById("SMM");
+    function SDmenu() {
+      if (sdmenu.style.display == 'none') {
+        sdmenu.style.display = 'block'
+      } else {
+        sdmenu.style.display = 'none'
+      }
+    }
+
+    function openProgram(programToOpen) {
+      triggerSM();
+      switch (programToOpen) {
+        case 'website':
+          displayWindow();
+          break;
+      
+        default:
+          break;
+      }
+    }
+
+    function triggerSM() {
+      if (sm.style.display == 'none') {
+        $('#start-button').click(function() {
+          $(".start-menu").addClass('fade');
+        });
+        sm.style.display = 'flex';
+      } else {
+        sm.style.display = 'none';
+      }
+    }
+    
+    function hideSM() {
+      sm.style.display = 'none';
+    }
+
     function detectIfMobile() {
       if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -299,8 +717,10 @@
     function displayWindow() {
       var win = document.getElementById('mydiv');
       if (mydiv.style.display == 'block') {
+        $("#mydiv").addClass('closing');
         mydiv.style.display = 'none';
       } else {
+        $("#mydiv").removeClass('closing');
         mydiv.style.display = 'block';
       }
     }
@@ -349,6 +769,7 @@
     });
 
     function closeWindow() {
+      $("#mydiv").addClass('closing');
       document.getElementById("mydiv").style.display = "none";
     }
 
