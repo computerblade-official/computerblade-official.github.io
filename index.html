@@ -376,6 +376,7 @@
 
     .start-menu.fade {
       animation: fade 0.4s linear;
+      z-index: 99999;
     }
 
     @keyframes fade {
@@ -677,6 +678,7 @@
       switch (programToOpen) {
         case 'website':
           displayWindow();
+          sdmenu.style.display = 'none';
           break;
       
         default:
@@ -686,12 +688,14 @@
 
     function triggerSM() {
       if (sm.style.display == 'none') {
+        sdmenu.style.display = 'none';
         $('#start-button').click(function() {
           $(".start-menu").addClass('fade');
         });
         sm.style.display = 'flex';
       } else {
         sm.style.display = 'none';
+        sdmenu.style.display = 'none';
       }
     }
     
