@@ -905,6 +905,16 @@
       }
     });
 
+    function launchStartupProgram() {
+      mydiv.style.display = 'block';
+      sm.style.display = 'none';
+      $("#dsi-1").removeClass('hilighted');
+      $('#prg1').removeClass('ti-fade-out');
+      $('#prg1').addClass('ti-fade-in');
+      document.getElementById("prg1").style.display = "block";
+      sdmenu.style.display = 'none';
+    }
+
     function openProgram(programToOpen) {
       triggerSM();
       switch (programToOpen) {
@@ -983,10 +993,10 @@
       $(logonscreen).addClass('fadeOut');
       document.getElementById("c").style.display = 'flex';
       document.getElementById("taskbar").style.display = 'inherit';
-      mydiv.style.display = 'none';
+      document.getElementById("mydiv").style.display = 'none';
       setTimeout(
-        openProgram('website')
-      , 1500)
+        launchStartupProgram
+      , 1000)
       try {
         audio = new Howl({
           src: ['audios/windows-startup.ogg', 'audios/windows-startup.mp3'],
