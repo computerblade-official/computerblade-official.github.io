@@ -387,7 +387,7 @@
 
     .ti-fade-out {
       opacity: 1;
-      animation: fade-out 0.25s linear;
+      animation: fade-out 0.25s forwards;
     }
 
     @keyframes fade {
@@ -487,6 +487,28 @@
         text-shadow: 0 1px 2px #000,0 1px 2px #000,0 1px 3px #000;
         text-align: center;
     }
+
+    .loadingScreen {
+      color: white;
+      background-color: black;
+      position: absolute !important;
+      z-index: 999999999999999 !important;
+      width: 100% !important;
+      height: 100vh !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loadingScreen.fadeOut {
+      animation: bs-fadeOut 1s forwards;
+    }
+
+    @keyframes bs-fadeOut {
+        from {opacity: 2;}
+        to {opacity: 0; visibility: hidden; display: none;}
+    }
+
   </style>
   <meta property="og:title" content="@computerblade's Website">
   <meta property="og:description" content="@computerblade's Website, meet him on Discord, SpaceHey, Reddit, etc...">
@@ -509,7 +531,14 @@
       justify-content: center;
       align-items: center;
     " onload="detectIfMobile()">
-  <div id="c" onclick="">
+
+  <div class="loadingScreen" id="bootscreen">
+    <video muted="muted" playsinline="" autoplay="">
+      <source src="videos/windows-bootscreen.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div id="c">
 
     <div class="desktop-icons">
       <div class="desktop-icon" id="dsi-1" onclick="hilightIcon('#dsi-1')" ondblclick="openProgram('website')">
@@ -800,7 +829,7 @@
     
 
   <div class="taskbar">
-    &nbsp;&nbsp;<img src="orb.png" onmouseover="this.src='orb_hover.png'" onmouseleave="this.src='orb.png'" width="40" height="40" onclick="triggerSM()"
+    &nbsp;&nbsp;<img src="orb.png" onmouseover="this.src='orb_hover.png'" onmouseleave="startBtnTexture()" width="40" height="40" onclick="triggerSM()"
       style="z-index: 99" id="start-button"/>
       <!-- src="https://cdn.jsdelivr.net/gh/computerblade-official/cdn.computerblade/project/computerblade-official.github.io/orb.png" -->
        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -851,16 +880,27 @@
           break;
       }
     }
+    var sb = document.getElementById('start-button');
+    
+    function startBtnTexture() {
+      if (sm.style.display == 'none') {
+        sb.src = 'orb.png';
+      } else {
+        sb.src = 'orb_hover.png';
+      }
+    }
 
     function triggerSM() {
       if (sm.style.display == 'none') {
         sdmenu.style.display = 'none';
         $(".start-menu").addClass('fade');
         sm.style.display = 'flex';
+        sb.src = 'orb_hover.png';
       } else {
         $(".start-menu").removeClass('fade');
         sm.style.display = 'none';
         sdmenu.style.display = 'none';
+        sb.src = 'orb.png';
       }
     }
     
@@ -879,8 +919,17 @@
       } else {
         // false for not mobile device
         console.log("not mobile device");
+        setTimeout(logonToSystem, 21000)
         // alignWinProperly();
       }
+    }
+
+    var bootscreen = document.getElementById("bootscreen")
+
+    function logonToSystem() {
+      bootscreen.style.display = 'none';
+      displayWindow();
+      openProgram('website');
     }
 
     function displayWindow() {
@@ -950,7 +999,7 @@
       document.getElementById("mydiv").style.display = "none";
       setTimeout(
         hidePRG1
-      , 230)
+      , 200)
     }
 
     function hidePRG1() {
