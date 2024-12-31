@@ -68,7 +68,7 @@
       /* position: relative; */
       justify-content: center;
       align-items: center;
-      z-index: 99999999;
+      /* z-index: 99999999; */
     }
 
     .shortcut {
@@ -517,7 +517,7 @@
       align-items: center;
       color: white;
       position: absolute !important;
-      z-index: 999999999999998 !important;
+      /* z-index: 999999999999998 !important; */
       width: 100% !important;
       height: 100vh !important;
       text-align: center;
@@ -825,7 +825,7 @@
   <!-- Here lies:
     Website Start menu (for now) -->
 
-    <div class="start-menu" id="start-menu" style="display: none;">
+    <div class="start-menu" id="start-menu">
       <div class="programs">
         <button class="program featured program1" onclick="openProgram('website')" style="background: url('icons/netcenter_7/256.png') no-repeat 3px/28px;"> Website </button>
       </div>
@@ -870,7 +870,7 @@
     </div>
     
 
-  <div class="taskbar">
+  <div class="taskbar" id="taskbar">
     &nbsp;&nbsp;<img src="orb.png" onmouseover="this.src='orb_hover.png'" onmouseleave="startBtnTexture()" width="40" height="40" onclick="triggerSM()"
       style="z-index: 99" id="start-button"/>
       <!-- src="https://cdn.jsdelivr.net/gh/computerblade-official/cdn.computerblade/project/computerblade-official.github.io/orb.png" -->
@@ -974,23 +974,32 @@
     function logonToSystem() {
       $(bootscreen).addClass('fadeOut');
       logonscreen.style.display = 'flex';
+      document.getElementById("c").style.display = 'none';
+      document.getElementById("taskbar").style.display = 'none';
       sm.style.display = 'none';
     }
 
     function logonToSystemSecondFn() {
       $(logonscreen).addClass('fadeOut');
+      document.getElementById("c").style.display = 'flex';
+      document.getElementById("taskbar").style.display = 'inherit';
+      mydiv.style.display = 'none';
+      setTimeout(
+        openProgram('website')
+      , 1500)
       try {
         audio = new Howl({
           src: ['audios/windows-startup.ogg', 'audios/windows-startup.mp3'],
           autoplay: true
         });
         audio.play();
+        // logonscreen.style.display = 'none';
       } catch (error) {
         console.error(error);
       }
       
-      closeWindow();
-      openProgram('website');
+      
+      // openProgram('website');
       sm.style.display = 'none';
     }
 
