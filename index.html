@@ -381,9 +381,22 @@
       z-index: 99999;
     }
 
+    .ti-fade-in {
+      animation: fade 0.25s linear;
+    }
+
+    .ti-fade-out {
+      animation: fade-out 0.25s linear;
+    }
+
     @keyframes fade {
       0% { opacity: 0 }
       50%,100% { opacity: 1 }
+    }
+
+    @keyframes fade-out {
+      0% { opacity: 1 }
+      50%,100% { opacity: 0; display: none }
     }
     
     .taskbar-item.opened.active::after {
@@ -438,13 +451,39 @@
       align-content: start;
       text-align: left;
       position: absolute;
-      left: 5px;
-      top: 5px;
+      left: 0;
+      top: 0;
       color: white;
     }
 
     .desktop-icon {
       text-align: center;
+      width: 80px;
+      /* height: 80px; */
+      padding: 4px 2px;
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    .desktop-icon .iconwrapper {
+        width: 100%;
+        height: calc(100% - 20px);
+        position: relative;
+        padding: 4px 2px;
+    }
+
+    .desktop-icon.hilighted, .hilighted {
+      border-color: #b8d6fc !important;
+      background: linear-gradient(0deg,rgba(193,220,252,.6666666667),rgba(220,235,252,.6666666667)) !important;
+      -webkit-box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.6666666667) !important;
+      box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.6666666667) !important;
+      background: -webkit-gradient(linear,left bottom,left top,from(rgba(193,220,252,.6666666667)),to(rgba(220,235,252,.6666666667))) !important;
+    }
+
+    .icontext, #icontext {
+        font-size: 10.75pt;
+        text-shadow: 0 1px 2px #000,0 1px 2px #000,0 1px 3px #000;
+        text-align: center;
     }
   </style>
   <meta property="og:title" content="@computerblade's Website">
@@ -468,12 +507,17 @@
       justify-content: center;
       align-items: center;
     " onload="detectIfMobile()">
-  <div id="c">
+  <div id="c" onclick="">
 
     <div class="desktop-icons">
-      <div class="desktop-icon" id="dsi-1">
-        <img src="icons/netcenter_7/256.png" alt="netcenter_7_256.ico" srcset=""><br>
-        <span>Icon</span>
+      <div class="desktop-icon" id="dsi-1" onclick="hilightIcon('#dsi-1')" ondblclick="openProgram('website')">
+        <span class="iconwrapper" id="dsi1-wrapper" onclick="hilightIcon('#dsi-1')" ondblclick="openProgram('website')">
+          <img src="icons/netcenter_7/256.png" alt="netcenter_7_256.ico" srcset="" width="65" height="65" onclick="hilightIcon('#dsi-1')" ondblclick="openProgram('website')">
+        </span>
+        <br>
+        <span class="icontext" id="icontext" style="font-size:10.75pt;text-shadow: 0 1px 2px #000,0 1px 2px #000,0 1px 3px #000;text-align:center" onclick="hilightIcon('#dsi-1')" ondblclick="openProgram('website')">
+          Website
+        </span>
       </div>
     </div>
 
@@ -780,12 +824,20 @@
       }
     }
 
+    document.addEventListener('click', function(event) {
+      const outsideClick = !document.getElementById('#dsi-1').contains(event.target);
+    });
+
     function openProgram(programToOpen) {
       triggerSM();
       switch (programToOpen) {
         case 'website':
           var win = document.getElementById('mydiv');
           mydiv.style.display = 'block';
+          sm.style.display = 'none';
+          $("#dsi-1").removeClass('hilighted');
+          $('#prg1').removeClass('ti-fade-out');
+          $('#prg1').addClass('ti-fade-in');
           document.getElementById("prg1").style.display = "block";
           sdmenu.style.display = 'none';
           break;
@@ -856,6 +908,10 @@
           (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + " PM";
       }
 
+      if (document.getElementById("time").textContent.startsWith("00:")) {
+        document.getElementById("time").textContent = document.getElementById("time").textContent.replace("00:", "12:")
+      }
+
       if (h < 10) {
         h = "0" + h;
       } else {
@@ -885,12 +941,27 @@
 
     function closeWindow() {
       $("#mydiv").addClass('closing');
+      $('#prg1').removeClass('ti-fade-in');
+      $('#prg1').addClass('ti-fade-out');
       document.getElementById("mydiv").style.display = "none";
-      document.getElementById("prg1").style.display = "none";
+      setTimeout(
+        hidePRG1
+      , 230)
+    }
+
+    function hidePRG1() {
+      document.getElementById("prg1").style.display = "none"
     }
 
     function openWindow() {
       document.getElementById("mydiv").style.display = "block";
+    }
+    function hilightIcon(PRG) {
+      $(PRG).addClass('hilighted');
+    }
+
+    function removeHilight(PRG) {
+      $(PRG).removeClass('hilighted');
     }
 
     setInterval(time, 1000);
