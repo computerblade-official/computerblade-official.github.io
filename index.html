@@ -386,17 +386,18 @@
     }
 
     .ti-fade-out {
+      opacity: 1;
       animation: fade-out 0.25s linear;
     }
 
     @keyframes fade {
       0% { opacity: 0 }
-      50%,100% { opacity: 1 }
+      50%,100% { opacity: 1; display: block; visibility: visible; }
     }
 
     @keyframes fade-out {
       0% { opacity: 1 }
-      50%,100% { opacity: 0; display: none }
+      50%,100% { opacity: 0; display: none; visibility: hidden; }
     }
     
     .taskbar-item.opened.active::after {
@@ -454,6 +455,7 @@
       left: 0;
       top: 0;
       color: white;
+      cursor: default;
     }
 
     .desktop-icon {
@@ -825,7 +827,10 @@
     }
 
     document.addEventListener('click', function(event) {
-      const outsideClick = !document.getElementById('#dsi-1').contains(event.target);
+      const outsideClick = !document.getElementById('dsi-1').contains(event.target);
+      if (outsideClick) {
+        $("#dsi-1").removeClass('hilighted');
+      }
     });
 
     function openProgram(programToOpen) {
@@ -850,11 +855,10 @@
     function triggerSM() {
       if (sm.style.display == 'none') {
         sdmenu.style.display = 'none';
-        $('#start-button').click(function() {
-          $(".start-menu").addClass('fade');
-        });
+        $(".start-menu").addClass('fade');
         sm.style.display = 'flex';
       } else {
+        $(".start-menu").removeClass('fade');
         sm.style.display = 'none';
         sdmenu.style.display = 'none';
       }
