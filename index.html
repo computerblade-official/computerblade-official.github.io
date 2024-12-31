@@ -69,7 +69,7 @@
       width: 100vw;
       /* display: table; */
       display: flex;
-          
+          /* position: relative; */
           justify-content: center;
           align-items: center;
     }
@@ -203,6 +203,7 @@
       justify-content: center;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
+      cursor: default;
     }
 
     #start-menu .link:not(:last-child):hover {
@@ -384,6 +385,67 @@
       0% { opacity: 0 }
       50%,100% { opacity: 1 }
     }
+    
+    .taskbar-item.opened.active::after {
+      border-radius: 2px;
+      border: 1px solid rgba(0,0,0,.5333333333);
+      -webkit-box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.5333333333);
+      box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.5333333333);
+      background: linear-gradient(180deg,hsla(0,0%,100%,.5019607843) 10%,hsla(0,0%,100%,.2),hsla(0,0%,100%,.6) 80%);
+      -webkit-transition: background-color .3s;
+      transition: background-color .3s;
+    }
+    .taskbar-item.opened.active::after {
+      width: 100%;
+      opacity: 1;
+      background: -webkit-gradient(linear,left top,left bottom,color-stop(10%,hsla(0,0%,100%,.5019607843)),color-stop(hsla(0,0%,100%,.2)),color-stop(80%,hsla(0,0%,100%,.6)));
+    }
+    .taskbar-item::after,  .taskbar-item::before {
+      left: 0;
+      right: 0;
+      -webkit-transition: opacity .2s;
+      transition: opacity .2s;
+    }
+    .taskbar-item::after, .taskbar-item::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: -1;
+    }
+    .taskbar-item.opened::before {
+      background: linear-gradient(155deg,hsla(0,0%,100%,.7019607843),transparent 40%);
+    }
+    .taskbar-item.opened::before {
+      border-radius: 2px;
+      border: 1px solid rgba(0,0,0,.5333333333);
+      -webkit-box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.5333333333);
+      box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.5333333333);
+      -webkit-transition: background-color .3s;
+      transition: background-color .3s;
+    }
+    .taskbar-item.opened::before {
+      opacity: 1;
+    }
+
+    .desktop-icons {
+      margin: 0 !important;
+      display: block !important;
+      justify-content: left !important;
+      align-content: start;
+      text-align: left;
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      color: white;
+    }
+
+    .desktop-icon {
+      text-align: center;
+    }
   </style>
   <meta property="og:title" content="@computerblade's Website">
   <meta property="og:description" content="@computerblade's Website, meet him on Discord, SpaceHey, Reddit, etc...">
@@ -408,7 +470,12 @@
     " onload="detectIfMobile()">
   <div id="c">
 
-    
+    <div class="desktop-icons">
+      <div class="desktop-icon" id="dsi-1">
+        <img src="icons/netcenter_7/256.png" alt="netcenter_7_256.ico" srcset=""><br>
+        <span>Icon</span>
+      </div>
+    </div>
 
     <div class="window active" style="
           min-width: 750px;
@@ -487,22 +554,57 @@
             socials!
           </article>
           <article role="tabpanel" id="tab-C" hidden style="min-height: 575px">
-            <h3>Contact me via</h3>
-            Discord: <a href="">@ayproductions5051</a><br />
-            SpaceHey:
-            <a href="https://spacehey.com/computerblade">@computerblade</a><br />
-            Reddit: <a href="https://www.reddit.com/u/NEXT-IDE">u/NEXT-IDE</a><br />
-            Email:
-            <a href="mailto:ayproductionsteam@gmail.com">ayproductionsteam@gmail.com</a><br />
-            <p>
-              Please note that I rarely check my emails. It is better to reach
-              out via Discord since I'm the most active there.
-            </p>
-            <p>
-              You can also add me as a friend by sending me a friend request
-              on Discord and SpaceHey! I will add you as a friend on the list
-              too (with your website link)!
-            </p>
+            <div style="display: flex;width:100%;padding-right: 40px;">
+              <table border="0" bordercolor="white" cellspacing="0" cellpadding="0" style="width:100%">
+                <tr>
+                  <td align="right">Name: </td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  <td align="left">computerblade</td>
+                </tr>
+                <tr>
+                  <td align="right">E-mail: </td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  <td align="left"><a href="mailto:ayproductionsteam@gmail.com">ayproductionsteam@gmail.com</a></td>
+                </tr>
+                <tr>
+                  <td align="right">&nbsp;&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  <td align="left">&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right">Discord: </td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  <td align="left"><a href="#">@ayproductions5051</a></td>
+                </tr>
+                <tr>
+                  <td align="right">SpaceHey: </td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  <td align="left"><a href="https://spacehey.com/computerblade">@computerblade</a></td>
+                </tr>
+                <tr>
+                  <td align="right">GitHub: </td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  <td align="left"><a href="https://github.com/computerblade-official">@computerblade-official</a></td>
+                </tr>
+              </table>
+              <img src="icons/friend_avatars/me.png" alt="contact avatar" style="filter: drop-shadow(2px 2px 5px rgba(0,0,0,.5333333333)) contrast(1.3);" style="float: right;">
+            </div>
+            
+            <table border="0" style="border:1px solid black;margin-top:20px" cellpadding="5" cellspacing="0">
+              <tr bgcolor="#fff747">
+                <td>
+                  <p>
+                    Please note that I rarely check my emails. It is better to reach
+                    out via Discord since I'm the most active there.
+                  </p>
+                  <p>
+                    You can also add me as a friend by sending me a friend request
+                    on Discord and SpaceHey! I will add you as a friend on the list
+                    too (with your website link)!
+                  </p>
+                </td>
+              </tr>
+            </table>
           </article>
           <article role="tabpanel" id="tab-D" hidden style="min-height: 575px;height:575px;overflow-y:scroll;overflow-x:hidden;text-align: center;">
             <h3 align="left" style="text-align: left;">Friends</h3>
@@ -652,9 +754,13 @@
     
 
   <div class="taskbar">
-    &nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/computerblade-official/cdn.computerblade/project/computerblade-official.github.io/orb.png" alt="Windows 7 Start Button" width="40" height="40" onclick="triggerSM()"
+    &nbsp;&nbsp;<img src="orb.png" onmouseover="this.src='orb_hover.png'" onmouseleave="this.src='orb.png'" width="40" height="40" onclick="triggerSM()"
       style="z-index: 99" id="start-button"/>
-
+      <!-- src="https://cdn.jsdelivr.net/gh/computerblade-official/cdn.computerblade/project/computerblade-official.github.io/orb.png" -->
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <div class="taskbar-items">
+        <button class="taskbar-item opened active" id="prg1" style="background: url('icons/netcenter_7/256.png') 50% no-repeat;background-size: 55%;min-height:40px;height: 40px;max-height:40px"></button>
+       </div>
     <div id="timedate">
       <span id="time">12:00 AM</span><br />
       <!--Placeholder time & date-->
@@ -680,6 +786,7 @@
         case 'website':
           var win = document.getElementById('mydiv');
           mydiv.style.display = 'block';
+          document.getElementById("prg1").style.display = "block";
           sdmenu.style.display = 'none';
           break;
       
@@ -725,9 +832,11 @@
       if (mydiv.style.display == 'block') {
         $("#mydiv").addClass('closing');
         mydiv.style.display = 'none';
+        document.getElementById("prg1").style.display = "none";
       } else {
         $("#mydiv").removeClass('closing');
         mydiv.style.display = 'block';
+        document.getElementById("prg1").style.display = "block";
       }
     }
 
@@ -777,6 +886,7 @@
     function closeWindow() {
       $("#mydiv").addClass('closing');
       document.getElementById("mydiv").style.display = "none";
+      document.getElementById("prg1").style.display = "none";
     }
 
     function openWindow() {
