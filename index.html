@@ -60,18 +60,15 @@
       cursor: move;
     }
 
-    #mydiv:dragging {
-      cursor: grabbing;
-    }
-
     #c {
       height: 100%;
       width: 100vw;
       /* display: table; */
       display: flex;
-          /* position: relative; */
-          justify-content: center;
-          align-items: center;
+      /* position: relative; */
+      justify-content: center;
+      align-items: center;
+      z-index: 99999999;
     }
 
     .shortcut {
@@ -492,7 +489,7 @@
       color: white;
       background-color: black;
       position: absolute !important;
-      z-index: 999999999999999 !important;
+      z-index: 9999999999999999 !important;
       width: 100% !important;
       height: 100vh !important;
       display: flex;
@@ -500,13 +497,51 @@
       justify-content: center;
     }
 
-    .loadingScreen.fadeOut {
+    .loadingScreen.fadeOut, .logonScreen.fadeOut {
       animation: bs-fadeOut 1s forwards;
     }
 
     @keyframes bs-fadeOut {
         from {opacity: 2;}
-        to {opacity: 0; visibility: hidden; display: none;}
+        to {opacity: 0; visibility: hidden;}
+    }
+
+    .logonScreen {
+      background: url('logonBG.jpg') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: absolute !important;
+      z-index: 999999999999998 !important;
+      width: 100% !important;
+      height: 100vh !important;
+      text-align: center;
+    }
+
+    .logonScreen label {
+      text-shadow: 0 1px 4px #000;
+      font-size: 16pt;
+    }
+
+    .logonScreen img {
+      -webkit-filter: drop-shadow(2px 2px 7px rgba(0,0,0,.5333333333));
+      filter: drop-shadow(2px 2px 7px rgba(0,0,0,.5333333333));
+
+    }
+
+    .logonScreen img:hover {
+      -webkit-filter:drop-shadow(0 0 12px #11c5f1);
+      filter:drop-shadow(0 0 12px #11c5f1);
+    }
+    
+    .logonScreen div {
+      display: block;
+      text-align: center;
     }
 
   </style>
@@ -536,6 +571,13 @@
     <video muted="muted" playsinline="" autoplay="">
       <source src="videos/windows-bootscreen.mp4" type="video/mp4">
     </video>
+  </div>
+  <div class="logonScreen" id="logonscreen" style="display: none;">
+    <div>
+      <img src="icons/guest-user.png" alt="Guest (Click Here to Logon)" onclick="logonToSystemSecondFn()">
+      <br>
+      <label for="guest-user" onclick="logonToSystemSecondFn()">Guest</label>
+    </div>
   </div>
 
   <div id="c">
@@ -844,6 +886,7 @@
   </div>
   </div>
   <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     var sm = document.getElementById("start-menu");
     var sdmenu = document.getElementById("SMM");
@@ -919,16 +962,33 @@
       } else {
         // false for not mobile device
         console.log("not mobile device");
-        setTimeout(logonToSystem, 21000)
+        setTimeout(logonToSystem, 21000);
         // alignWinProperly();
       }
     }
 
-    var bootscreen = document.getElementById("bootscreen")
+    var bootscreen = document.getElementById("bootscreen");
+    var logonscreen = document.getElementById("logonscreen");
+    var audio = null;
 
     function logonToSystem() {
-      bootscreen.style.display = 'none';
-      displayWindow();
+      $(bootscreen).addClass('fadeOut');
+      logonscreen.style.display = 'flex';
+    }
+
+    function logonToSystemSecondFn() {
+      $(logonscreen).addClass('fadeOut');
+      try {
+        audio = new Howl({
+          src: ['audios/windows-startup.ogg', 'audios/windows-startup.mp3'],
+          autoplay: true
+        });
+        audio.play();
+      } catch (error) {
+        console.error(error);
+      }
+      
+      closeWindow();
       openProgram('website');
     }
 
