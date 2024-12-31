@@ -909,7 +909,7 @@
       triggerSM();
       switch (programToOpen) {
         case 'website':
-          var win = document.getElementById('mydiv');
+          // var win = document.getElementById('mydiv');
           mydiv.style.display = 'block';
           sm.style.display = 'none';
           $("#dsi-1").removeClass('hilighted');
@@ -974,6 +974,7 @@
     function logonToSystem() {
       $(bootscreen).addClass('fadeOut');
       logonscreen.style.display = 'flex';
+      sm.style.display = 'none';
     }
 
     function logonToSystemSecondFn() {
@@ -990,6 +991,7 @@
       
       closeWindow();
       openProgram('website');
+      sm.style.display = 'none';
     }
 
     function displayWindow() {
