@@ -560,6 +560,15 @@
       right:0px;
     }
 
+    #start-menu .programs-search {
+      background: #f1f5fb;
+      -webkit-box-shadow: inset 0 2px 3px #d6e0ef;
+      box-shadow: inset 0 2px 3px #d6e0ef;
+      padding: 8px 10px;
+      position: absolute;
+      bottom: 0px;
+      width: 225px;
+    }
   </style>
   <meta property="og:title" content="@computerblade's Website">
   <meta property="og:description" content="@computerblade's Website, meet him on Discord, SpaceHey, Reddit, etc...">
@@ -844,7 +853,11 @@
     <div class="start-menu" id="start-menu">
       <div class="programs">
         <button class="program featured program1" onclick="openProgram('website')" style="background: url('icons/netcenter_7/256.png') no-repeat 3px/28px;"> Website </button>
+        <div class="programs-search">
+          <input type="search" placeholder="Search programs and files" style="width:100%">
+        </div>
       </div>
+      
       <div class="links">
         <div class="account" style="padding: 0px">
           <div
