@@ -95,15 +95,19 @@
         transform: perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1);
       }
 
-      100% {
-        opacity: 0.3;
+      95% {
+        opacity: 0.000001;
         transform: perspective(600px) rotateX(-13deg) translateY(0) scale(0.85);
+      }
+      100% {
+        display: none;
+        visibility: hidden;
       }
     }
 
     .window.active.closing {
-       animation: .5s windowClose cubic-bezier(.19,1,.22,1);
-       display: none;
+       animation: 0.5s cubic-bezier(0.19, 1, 0.22, 1) windowClose !important;
+       /* display: none; */
     }
 
     .start-menu {
@@ -233,6 +237,8 @@
       display: -ms-flexbox;
       display: flex;
       color: currentColor;
+      width: fit-content;
+      position:relative;
     }
 
     .button-group:first-child {
@@ -542,6 +548,16 @@
     .logonScreen div {
       display: block;
       text-align: center;
+    }
+
+    .button-ext .menu {
+      position:absolute;
+      right:0px;
+    }
+
+    .button-ext .menu::before {
+      position:absolute;
+      right:0px;
     }
 
   </style>
@@ -860,9 +876,9 @@
               <li role="menuitem">
                 <button>Restart</button>
               </li>
-            </ul>
           </div>
           
+          </ul>
         </div>
         
       </div>
@@ -922,6 +938,7 @@
           // var win = document.getElementById('mydiv');
           mydiv.style.display = 'block';
           sm.style.display = 'none';
+          $(mydiv).removeClass('closing');
           $("#dsi-1").removeClass('hilighted');
           $('#prg1').removeClass('ti-fade-out');
           $('#prg1').addClass('ti-fade-in');
@@ -1077,14 +1094,21 @@
       $("#mydiv").addClass('closing');
       $('#prg1').removeClass('ti-fade-in');
       $('#prg1').addClass('ti-fade-out');
-      document.getElementById("mydiv").style.display = "none";
+      // document.getElementById("mydiv").style.display = "none";
       setTimeout(
         hidePRG1
       , 200)
+      setTimeout(
+        hideWIN
+      , 250)
     }
 
     function hidePRG1() {
       document.getElementById("prg1").style.display = "none"
+    }
+
+    function hideWIN() {
+      mydiv.style.display = 'none';
     }
 
     function openWindow() {
