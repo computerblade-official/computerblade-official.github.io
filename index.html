@@ -1015,6 +1015,7 @@
       $(bootscreen).addClass('fadeOut');
       logonscreen.style.display = 'flex';
       document.getElementById("c").style.display = 'none';
+      document.getElementById("prg1").style.display = 'none';
       document.getElementById("taskbar").style.display = 'none';
       sm.style.display = 'none';
     }
@@ -1022,6 +1023,7 @@
     function logonToSystemSecondFn() {
       $(logonscreen).addClass('fadeOut');
       document.getElementById("c").style.display = 'flex';
+      document.getElementById("prg1").style.display = 'block';
       document.getElementById("taskbar").style.display = 'inherit';
       document.getElementById("mydiv").style.display = 'none';
       setTimeout(
