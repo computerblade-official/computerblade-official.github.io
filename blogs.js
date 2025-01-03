@@ -1,0 +1,14 @@
+var blogs = [
+  {
+    "title": "Welcome! #2",
+    "datetime": "02-Jan-2025 06:32:52 PM IST",
+    "content": "This is the second ever blog post of this site (copy of the 1st one). Hopefully I manage to write more blogs soon, and yes I will also set up Google Analytics to track how many users visit this site.<br><br>Thanks for reading!",
+    "comments": true
+  },
+  {
+    "title": "Welcome!",
+    "datetime": "02-Jan-2025 06:32:52 PM IST",
+    "content": "This is the first ever blog post of this site. Hopefully I manage to write more blogs soon, and yes I will also set up Google Analytics to track how many users visit this site.<br><br>Thanks for reading!",
+    "comments": true
+  }
+];

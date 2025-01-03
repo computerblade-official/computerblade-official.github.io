@@ -726,8 +726,8 @@
             </div>
           </article>
           <article role="tabpanel" id="tab-C" hidden style="min-height: 575px;height:575px;overflow-y:scroll;overflow-x:hidden">
-            <div class="project-list" id="project-list">
-              <div class="project" id="project">
+            <div class="project-list" id="blog-list">
+              <div class="project" id="blog">
                 <table border="0" bordercolor="white" cellspacing="0" cellpadding="0">
                   <tr>
                     <td style="height:70px">
@@ -742,12 +742,13 @@
                   </tr>
                 </table>
               </div>
-              <hr size="1" color="#eee" style="margin-top: 11px !important;">
+              
             </div>
             <div class="blog-summary" id="blog-summary" style="display:none">
-              <img src="icons/backBtn.png" alt="Back" width="32" height="32">
-              <h3 align="center" style="margin-top: 0;">Blog Post Heading</h3>
-              <p>
+              <img src="icons/backBtn.png" alt="Back" width="32" height="32" id="blog-summaryBB" onclick="hideblog()" style="cursor:pointer">
+              <h3 align="center" style="margin-top: 0;" id="blog-heading">Blog Post Heading</h3>
+              <p id="blog-date">Created on (date placeholder)</p>
+              <p id="blog-content">
                 Lorem ipsum.
               </p>
             </div>
@@ -971,11 +972,19 @@
     </div>
   </div>
   </div>
+  <script src="blogs.js"></script>
   <script src="script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     var sm = document.getElementById("start-menu");
     var sdmenu = document.getElementById("SMM");
+    var bsbb = document.getElementById("blog-summaryBB");
+
+    function hideblog() {
+      document.getElementById('blog-summary').style.display = 'none';
+      document.getElementById('blog-list').style.display = 'block';
+    }
+
     function SDmenu() {
       if (sdmenu.style.display == 'none') {
         sdmenu.style.display = 'block'
@@ -1077,7 +1086,9 @@
       sm.style.display = 'none';
     }
 
-    function logonToSystemSecondFn() {
+    var bd;
+
+    function logonToSystemSecondFn(array) {
       $(logonscreen).addClass('fadeOut');
       document.getElementById("c").style.display = 'flex';
       document.getElementById("prg1").style.display = 'block';
@@ -1086,20 +1097,48 @@
       setTimeout(
         launchStartupProgram
       , 1000)
-      try {
         audio = new Howl({
           src: ['audios/windows-startup.ogg', 'audios/windows-startup.mp3'],
           autoplay: true
         });
         audio.play();
         // logonscreen.style.display = 'none';
-      } catch (error) {
-        console.error(error);
-      }
+          var html = '',
+              el = document.getElementById("blog-list");
+          bd = JSON.parse(JSON.stringify(blogs));
+          for (var i = 0; i < blogs.length; i++) {
+              var t = bd[i].title;
+              console.log("'" + t + "'");
+              var com = bd[i].comments;
+              var blogdata = "\"" + t + "\"" + ", " + "\"" + com + "\"" + ", " + i;
+              console.log(blogdata);
+              html += "<div class='project' id='blog' onclick='getBlogData(" +  blogdata +  ")'>" + '<table border="0" bordercolor="white" cellspacing="0" cellpadding="0"><tr><td style="height:70px"><img src="icons/Journal_105/256.png" alt="Blog Post" class="prj-icon" id="blog1"></td><td style="height:70px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign="center" style="height:70px;vertical-align: middle;text-overflow: ellipsis;"><b style="font-size: 10.75pt;">' + t + '</b><br><br><p style="margin: 0;margin-top: 5px !important;">' + bd[i].content.toString().replace(/<\/?[^>]+(>|$)/g, "") + '</p></td></tr></table></div><hr size="1" color="#eee" style="margin-top: 11px !important;margin-bottom: 11px !important;"">';
+              // console.log("<div class='project' id='blog' onclick='getBlogData(" +  blogdata +  ")'>" + '<table border="0" bordercolor="white" cellspacing="0" cellpadding="0"><tr><td style="height:70px"><img src="icons/Journal_105/256.png" alt="Blog Post" class="prj-icon" id="blog1"></td><td style="height:70px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign="center" style="height:70px;vertical-align: middle;text-overflow: ellipsis;"><b style="font-size: 10.75pt;">' + val.title + '</b><br><br><p style="margin: 0;margin-top: 5px !important;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem excepturi ipsa molestias! Aperiam beatae, iste laborum maxime tenetur aut, perferendis ducimus, veritatis aliquid ut illum dicta quas itaque asperiores rerum.</p></td></tr></table></div><hr size="1" color="#eee" style="margin-top: 11px !important;margin-bottom: 11px !important;"">')
+              el.innerHTML = html;
+          
+          
+          };
+          el.innerHTML += '<br><p align="center">There are no more blogs!</p>';
       
       
       // openProgram('website');
       sm.style.display = 'none';
+    }
+
+    var bl = document.getElementById("blog-list");
+    var blog_s = document.getElementById("blog-summary");
+    var blog_h = document.getElementById("blog-heading");
+    var blog_d = document.getElementById("blog-date");
+    var blog_c = document.getElementById("blog-content");
+    var obj;
+    function getBlogData(title, comments, arrayId) {
+      
+      obj = bd;
+      blog_h.innerHTML = title;
+      blog_d.innerHTML = 'Created on ' + obj[arrayId]['datetime'];
+      blog_c.innerHTML = obj[arrayId]['content'];
+      bl.style.display = 'none';
+      blog_s.style.display = 'block';
     }
 
     function displayWindow() {
